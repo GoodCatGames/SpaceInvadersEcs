@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54eef17b943433488d364ce55be087c, type: 3}
+  m_Name: TestGun
+  m_EditorClassIdentifier: 
+  _bulletBlueprint: {fileID: 11400000, guid: 3d6725a4d7dd44845891cc85ba66ef67, type: 2}
+  _bulletSpeed:
+    Value: 5
+  _ammoCapacity:
+    Value: 600
+  _timeBetweenShotsSetupComponent:
+    TimeSec: 0.15
+  _reloadGunComponent:
+    TimeSec: 1
