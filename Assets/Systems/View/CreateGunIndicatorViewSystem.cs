@@ -13,13 +13,14 @@ namespace SpaceInvadersLeoEcs.Systems.View
     internal sealed class CreateGunIndicatorViewSystem : CreateViewSystem<IsGunIndicatorComponent>
     {
         // auto-injected fields.
-        private readonly GameContext _gameContext = null;
+        private readonly SceneData _sceneData = null;
+        private readonly GameConfiguration _gameConfiguration = null;
         
         protected override void CreateView(ref EcsEntity entity, Vector3 startPosition)
         {
-            var gunIndicatorPrefab = _gameContext.GunUndicatorPrefab;
+            var gunIndicatorPrefab = _gameConfiguration.GunUndicatorPrefab;
             
-            var instantiate = Object.Instantiate(gunIndicatorPrefab, _gameContext.Canvas.transform);
+            var instantiate = Object.Instantiate(gunIndicatorPrefab, _sceneData.Canvas.transform);
             var transform = instantiate.transform;
             transform.localPosition = startPosition;
             

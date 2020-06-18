@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace SpaceInvadersLeoEcs.Blueprints
 {
-    [CreateAssetMenu(fileName = "Bullet", menuName = "SpaceInvandersLeoEcs/Bullet", order = 0)]
+    [CreateAssetMenu(fileName = "Bullet", menuName = "SpaceInvadersLeoEcs/Bullet", order = 10)]
     [Serializable]
     public class BulletBlueprint : Blueprint
     {

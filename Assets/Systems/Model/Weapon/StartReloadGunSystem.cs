@@ -17,7 +17,7 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
             _filterGunsNoAmmo = null;
 
         // Manual
-        private readonly EcsFilter<OwnerComponent, ReloadGunComponent, AmmoCapacity, Ammo>.Exclude<TimeRGunReloadComponent>
+        private readonly EcsFilter<OwnerPlayerComponent, ReloadGunComponent, AmmoCapacity, Ammo>.Exclude<TimeRGunReloadComponent>
             _filterGunsWithAmmo = null;
 
         private readonly EcsFilter<InputReloadGunEvent> _filterInputReloadGunEvent = null;
@@ -42,7 +42,7 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
         }
 
         private void ManualReload(EcsFilter<InputReloadGunEvent> filterInputReloadGunEvent,
-            EcsFilter<OwnerComponent, ReloadGunComponent, AmmoCapacity, Ammo>.Exclude<TimeRGunReloadComponent>
+            EcsFilter<OwnerPlayerComponent, ReloadGunComponent, AmmoCapacity, Ammo>.Exclude<TimeRGunReloadComponent>
                 filterGunsWithAmmo)
         {
             foreach (var i in filterInputReloadGunEvent)
@@ -52,7 +52,7 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
 
                 foreach (var j in filterGunsWithAmmo)
                 {
-                    var owner = filterGunsWithAmmo.Get1(j).Entity;
+                    var owner = filterGunsWithAmmo.Get1(j).PlayerEntity;
                     if (owner.Has<PlayerComponent>()
                         && owner.Get<PlayerComponent>().Number == playerNumber)
                     {

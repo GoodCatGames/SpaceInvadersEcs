@@ -35,30 +35,30 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Move
             var delta = 0.01f;
             borderPosition = position;
             var isOutBorder = false;
-            if (position.x >= _gameContext.MaxBorderScreen.x)
+            if (position.x >= _gameContext.MaxBorderGameField.x)
             {
-                borderPosition.x = _gameContext.MaxBorderScreen.x;
+                borderPosition.x = _gameContext.MaxBorderGameField.x;
                 borderPosition.x -= delta;
                 isOutBorder = true;
             }
 
-            if (position.y >= _gameContext.MaxBorderScreen.y)
+            if (position.y >= _gameContext.MaxBorderGameField.y)
             {
-                borderPosition.y = _gameContext.MaxBorderScreen.y;
+                borderPosition.y = _gameContext.MaxBorderGameField.y;
                 borderPosition.y -= delta;
                 isOutBorder = true;
             }
 
-            if (position.x <= _gameContext.MinBorderScreen.x)
+            if (position.x <= _gameContext.MinBorderGameField.x)
             {
-                borderPosition.x = _gameContext.MinBorderScreen.x;
+                borderPosition.x = _gameContext.MinBorderGameField.x;
                 borderPosition.x += delta;
                 isOutBorder = true;
             }
 
-            if (position.y <= _gameContext.MinBorderScreen.y)
+            if (position.y <= _gameContext.MinBorderGameField.y)
             {
-                borderPosition.y = _gameContext.MinBorderScreen.y;
+                borderPosition.y = _gameContext.MinBorderGameField.y;
                 borderPosition.y += delta;
                 isOutBorder = true;
             }

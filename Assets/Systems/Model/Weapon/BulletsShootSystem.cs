@@ -14,7 +14,7 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
     {
         // auto-injected fields.
         private readonly EcsWorld _world = null;
-        private readonly EcsFilter<BlueprintRefComponent<BulletBlueprint>, Shooting, OwnerComponent, BulletSpeed> _filter = null;
+        private readonly EcsFilter<BlueprintRefComponent<BulletBlueprint>, Shooting, OwnerPlayerComponent, BulletSpeed> _filter = null;
         
         public void Run()
         {
@@ -24,9 +24,9 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
                 var ownerComponent = _filter.Get3(i);
                 var bulletSpeed = _filter.Get4(i);
 
-                if(!ownerComponent.Entity.Has<ViewObjectComponent>()) throw new Exception();
+                if(!ownerComponent.PlayerEntity.Has<ViewObjectComponent>()) throw new Exception();
 
-                var viewObjectComponent = ownerComponent.Entity.Get<ViewObjectComponent>();
+                var viewObjectComponent = ownerComponent.PlayerEntity.Get<ViewObjectComponent>();
 
                 var positionGun = viewObjectComponent.ViewObject.Position;
                 CreateBullet(blueprintRefComponent.Value, positionGun, bulletSpeed.Value);

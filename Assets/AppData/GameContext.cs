@@ -7,29 +7,13 @@ using UnityEngine.UI;
 
 namespace SpaceInvadersLeoEcs.AppData
 {
-    internal class GameContext : MonoBehaviour
+    internal class GameContext
     {
-        [NonSerialized] public GameStates GameState;
+        public GameStates GameState;
+        public Vector2 MaxBorderGameField = default;
+        public Vector2 MinBorderGameField = default;
 
-        public PlayerConfig Player1Config = default;
-        public PlayerConfig Player2Config = default;
-
-        // Scene Objects
-        public Camera Camera = default;
-        public Canvas Canvas = default;
-
-        public Canvas SplashScreen = default;
-        public Text SplashScreenScore = default;
-
-        public Text ScoreText = default;
-
-        // Prefabs
-        public GameObject GunUndicatorPrefab = default;
-
-        // Blueprints
+        // Mobs - Powers
         public Dictionary<MobBlueprint, float> MobBlueprintPowers = default;
-
-        [NonSerialized] public Vector2 MaxBorderScreen = default;
-        [NonSerialized] public Vector2 MinBorderScreen = default;
     }
 }

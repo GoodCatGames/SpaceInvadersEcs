@@ -11,13 +11,13 @@ namespace SpaceInvadersLeoEcs.Helpers
 {
     internal static class FilterExtensions
     {
-        public static EcsEntity GetGunOfPlayer(this EcsFilter<IsCanShootComponent, OwnerComponent> guns,
+        public static EcsEntity GetGunOfPlayer(this EcsFilter<IsCanShootComponent, OwnerPlayerComponent> guns,
             int playerNumber)
         {
             foreach (var i in guns)
             {
                 var ownerComponent = guns.Get2(i);
-                var ownerPlayer = ownerComponent.Entity;
+                var ownerPlayer = ownerComponent.PlayerEntity;
                 if (ownerPlayer.TryGet<PlayerComponent>(out var gunPlayerComponent) && gunPlayerComponent.Number == playerNumber)
                 {
                     return guns.GetEntity(i);
@@ -27,12 +27,12 @@ namespace SpaceInvadersLeoEcs.Helpers
         }
         
         public static Text GetIndicator(this 
-            EcsFilter<WrapperUnityObject<Text>, OwnerComponent, IsGunIndicatorComponent> indicators, int numberPlayer)
+            EcsFilter<WrapperUnityObject<Text>, OwnerPlayerComponent, IsGunIndicatorComponent> indicators, int numberPlayer)
         {
             foreach (var i in indicators)
             {
                 var ownerComponent = indicators.Get2(i);
-                if(ownerComponent.Entity.Get<PlayerComponent>().Number != numberPlayer) continue;
+                if(ownerComponent.PlayerEntity.Get<PlayerComponent>().Number != numberPlayer) continue;
                 var text = indicators.Get1(i);
                 return text.Value;
             }

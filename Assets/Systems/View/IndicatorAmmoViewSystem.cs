@@ -17,11 +17,11 @@ namespace SpaceInvadersLeoEcs.Systems.View
         // auto-injected fields.
         private readonly AudioService _audioService = null;
 
-        private readonly EcsFilter<IsCanShootComponent, OwnerComponent, IsReloadStartEvent> _gunsStartReload = null;
-        private readonly EcsFilter<IsCanShootComponent, OwnerComponent, IsReloadEndEvent> _gunsEndReload = null;
-        private readonly EcsFilter<IsCanShootComponent, OwnerComponent, IsShotMadeEvent> _gunsMadeShot = null;
+        private readonly EcsFilter<IsCanShootComponent, OwnerPlayerComponent, IsReloadStartEvent> _gunsStartReload = null;
+        private readonly EcsFilter<IsCanShootComponent, OwnerPlayerComponent, IsReloadEndEvent> _gunsEndReload = null;
+        private readonly EcsFilter<IsCanShootComponent, OwnerPlayerComponent, IsShotMadeEvent> _gunsMadeShot = null;
 
-        private readonly EcsFilter<WrapperUnityObject<Text>, OwnerComponent, IsGunIndicatorComponent>
+        private readonly EcsFilter<WrapperUnityObject<Text>, OwnerPlayerComponent, IsGunIndicatorComponent>
             _indicators = null;
 
         void IEcsRunSystem.Run()
@@ -37,8 +37,8 @@ namespace SpaceInvadersLeoEcs.Systems.View
                 var gun = _gunsStartReload.GetEntity(i);
                 SetReloadState(gun);
 
-                var playerOwner = gun.Get<OwnerComponent>();
-                var numberPlayer = playerOwner.Entity.Get<PlayerComponent>().Number;
+                var playerOwner = gun.Get<OwnerPlayerComponent>();
+                var numberPlayer = playerOwner.PlayerEntity.Get<PlayerComponent>().Number;
                 _audioService.StartPlayReloadPlayer(numberPlayer);
             }
 
@@ -47,8 +47,8 @@ namespace SpaceInvadersLeoEcs.Systems.View
                 var gun = _gunsEndReload.GetEntity(i);
                 SetAmmoState(gun);
                 
-                var playerOwner = gun.Get<OwnerComponent>();
-                var numberPlayer = playerOwner.Entity.Get<PlayerComponent>().Number;
+                var playerOwner = gun.Get<OwnerPlayerComponent>();
+                var numberPlayer = playerOwner.PlayerEntity.Get<PlayerComponent>().Number;
                 
                 _audioService.StopPlayReload(numberPlayer);
             }
@@ -78,12 +78,12 @@ namespace SpaceInvadersLeoEcs.Systems.View
        
         private Text GetIndicator(EcsEntity gun)
         {
-            var ownerComponent = gun.Get<OwnerComponent>();
+            var ownerComponent = gun.Get<OwnerPlayerComponent>();
             var indicator = GetIndicator(ownerComponent);
             return indicator;
         }
 
-        private Text GetIndicator(OwnerComponent ownerComponent) =>
-            _indicators.GetIndicator(ownerComponent.Entity.Get<PlayerComponent>().Number);
+        private Text GetIndicator(OwnerPlayerComponent ownerPlayerComponent) =>
+            _indicators.GetIndicator(ownerPlayerComponent.PlayerEntity.Get<PlayerComponent>().Number);
     }
 }

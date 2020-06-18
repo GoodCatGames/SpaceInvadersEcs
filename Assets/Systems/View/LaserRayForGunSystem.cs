@@ -17,7 +17,7 @@ namespace SpaceInvadersLeoEcs.Systems.View
         private readonly GameContext _gameContext = null;
 
         private readonly EcsFilter<WrapperUnityObject<LineRenderer>, ChangePositionEvent, PlayerComponent> _filterLaserRays = null;
-        private readonly EcsFilter<WrapperUnityObject<Text>, OwnerComponent, IsGunIndicatorComponent> _filterIndicators = null;  
+        private readonly EcsFilter<WrapperUnityObject<Text>, OwnerPlayerComponent, IsGunIndicatorComponent> _filterIndicators = null;  
         
         void IEcsRunSystem.Run()
         {
@@ -35,7 +35,7 @@ namespace SpaceInvadersLeoEcs.Systems.View
         private void SetLaser(LineRenderer lineRenderer, ChangePositionEvent changePositionEvent, out Vector2 positionIndicator)
         {
             var startPositionLaser = changePositionEvent.positionNew;
-            var endPositionLaser = new Vector2(startPositionLaser.x, _gameContext.MaxBorderScreen.y);
+            var endPositionLaser = new Vector2(startPositionLaser.x, _gameContext.MaxBorderGameField.y);
 
             var layer = LayerMask.GetMask("Mobs");
             var raycastHit2D = Physics2D.Raycast(startPositionLaser, UnityEngine.Vector2.up, Mathf.Infinity, layer);

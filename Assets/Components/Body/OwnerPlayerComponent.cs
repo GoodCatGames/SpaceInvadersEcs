@@ -2,8 +2,8 @@
 
 namespace SpaceInvadersLeoEcs.Components.Body
 {
-    internal struct OwnerComponent
+    internal struct OwnerPlayerComponent
     {
-        public EcsEntity Entity;
+        public EcsEntity PlayerEntity;
     }
 }

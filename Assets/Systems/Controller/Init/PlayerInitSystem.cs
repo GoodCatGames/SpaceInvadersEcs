@@ -17,12 +17,13 @@ namespace SpaceInvadersLeoEcs.Systems.Controller.Init
     {
         // auto-injected fields.
         private readonly EcsWorld _world = null;
-        private readonly GameContext _gameContext = null;
+        private readonly SceneData _sceneData = null;
+        private readonly GameConfiguration _gameConfiguration = null;
 
         public void Init()
         {
-            if(_gameContext.Player1Config != null) InitPlayer(_gameContext.Player1Config.Transform, 1, _gameContext.Player1Config.GunPlayer);
-            if(_gameContext.Player2Config != null) InitPlayer(_gameContext.Player2Config.Transform, 2, _gameContext.Player2Config.GunPlayer);
+            if(_sceneData.Player1 != null) InitPlayer(_sceneData.Player1, 1, _gameConfiguration.Player1Gun);
+            if(_sceneData.Player2 != null) InitPlayer(_sceneData.Player2, 2, _gameConfiguration.Player2Gun);
         }
 
         private void InitPlayer(Transform playerTransform, int numberPlayer, GunBlueprint gunBlueprint)
@@ -59,8 +60,8 @@ namespace SpaceInvadersLeoEcs.Systems.Controller.Init
         private void SetStartGun(EcsEntity player, GunBlueprint gunBlueprint)
         {
             var gun = gunBlueprint.CreateEntity(_world);
-            ref var ownerComponent = ref gun.Get<OwnerComponent>();
-            ownerComponent.Entity = player;
+            ref var ownerComponent = ref gun.Get<OwnerPlayerComponent>();
+            ownerComponent.PlayerEntity = player;
             gun.Get<IsCanShootComponent>();
         }
 
@@ -69,7 +70,7 @@ namespace SpaceInvadersLeoEcs.Systems.Controller.Init
             var entity = _world.NewEntity();
             entity.Get<IsGunIndicatorComponent>();
             entity.Get<CreateViewRequest>();
-            entity.Replace(new OwnerComponent() {Entity = player});
+            entity.Replace(new OwnerPlayerComponent() {PlayerEntity = player});
         }
     }
 }

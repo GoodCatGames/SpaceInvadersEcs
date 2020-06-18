@@ -13,7 +13,7 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
         private readonly EcsFilter<InputShootStartedEvent> _filterShootStarted = null;
         private readonly EcsFilter<InputShootCanceledEvent> _filterShootCanceled = null;
         
-        private readonly EcsFilter<IsCanShootComponent, OwnerComponent> _filterGuns = null;
+        private readonly EcsFilter<IsCanShootComponent, OwnerPlayerComponent> _filterGuns = null;
         
         private readonly HashSet<int> _numberPlayersIsShooting = new HashSet<int>(); 
         

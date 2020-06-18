@@ -234,8 +234,8 @@ GameObject:
   m_Component:
   - component: {fileID: 324185826}
   - component: {fileID: 324185825}
-  - component: {fileID: 324185827}
   - component: {fileID: 324185828}
+  - component: {fileID: 324185827}
   m_Layer: 0
   m_Name: AppContainer
   m_TagString: Untagged
@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f030ce5c88b409a45acb0cad1e39705c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Configuration: {fileID: 11400000, guid: 311a8bafd06d3a64da2ee9980384ba8f, type: 2}
 --- !u!4 &324185826
 Transform:
   m_ObjectHideFlags: 0
@@ -278,25 +279,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 324185824}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ef64fbabcf545dd9442b015a3993c3f, type: 3}
+  m_Script: {fileID: 11500000, guid: 077511c694ce40449706be395e164ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1Config:
-    Transform: {fileID: 1880023552}
-    GunPlayer: {fileID: 11400000, guid: 4ee862fcb99fb634ba0e7bfe5fcb9dd8, type: 2}
-    Speed: 10
-  Player2Config:
-    Transform: {fileID: 511846196}
-    GunPlayer: {fileID: 11400000, guid: 583fce5a8fbf0104590e28308507030a, type: 2}
-    Speed: 10
   Camera: {fileID: 519420031}
   Canvas: {fileID: 1767691868}
   SplashScreen: {fileID: 1062030244}
   SplashScreenScore: {fileID: 1047324765}
   ScoreText: {fileID: 1909205959}
-  GunUndicatorPrefab: {fileID: 5482950468450475105, guid: 33827459a0205694fb3ef418983766b0,
-    type: 3}
-  Configuratuon: {fileID: 11400000, guid: fafe02e14a6e7fc43b65efaf1b73a31f, type: 2}
+  Player1: {fileID: 1880023552}
+  Player2: {fileID: 511846196}
 --- !u!114 &324185828
 MonoBehaviour:
   m_ObjectHideFlags: 0

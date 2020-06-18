@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace SpaceInvadersLeoEcs.Blueprints
 {
-    [CreateAssetMenu(fileName = "Mob", menuName = "SpaceInvandersLeoEcs/Mob", order = 0)]
+    [CreateAssetMenu(fileName = "Mob", menuName = "SpaceInvadersLeoEcs/Mob", order = 10)]
     [Serializable]
     public class MobBlueprint : Blueprint
     {

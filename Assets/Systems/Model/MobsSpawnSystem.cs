@@ -32,8 +32,8 @@ namespace SpaceInvadersLeoEcs.Systems.Model
             var lostPower = powerMobs;
             while (TryGetRandomMob(out var mobBlueprint, lostPower))
             {
-                var randomXPosition = Random.Range(_gameContext.MinBorderScreen.x, _gameContext.MaxBorderScreen.x);
-                CreateMob(mobBlueprint, new Vector2(randomXPosition, _gameContext.MaxBorderScreen.y));
+                var randomXPosition = Random.Range(_gameContext.MinBorderGameField.x, _gameContext.MaxBorderGameField.x);
+                CreateMob(mobBlueprint, new Vector2(randomXPosition, _gameContext.MaxBorderGameField.y));
                 var powerMob = _gameContext.MobBlueprintPowers[mobBlueprint];
                 if (powerMob < 0.1f) throw new Exception("powerMob so weak!"); 
                 lostPower -= powerMob;

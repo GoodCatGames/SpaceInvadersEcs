@@ -15,7 +15,7 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
         private readonly EcsFilter<InputMoveCanceledEvent> _filterMoveCanceled = null;
         private readonly EcsFilter<PlayerComponent, MoveComponent> _filterMove = null;
         
-        private readonly GameContext _gameContext = null;
+        private readonly GameConfiguration _gameConfiguration = null;
         
         void IEcsRunSystem.Run()
         {
@@ -61,8 +61,8 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
 
         private float GetSpeedPlayer(int numberPlayer)
         {
-            if (numberPlayer == 1) return _gameContext.Player1Config.Speed;
-            if (numberPlayer == 2) return _gameContext.Player2Config.Speed;
+            if (numberPlayer == 1) return _gameConfiguration.Player1Speed;
+            if (numberPlayer == 2) return _gameConfiguration.Player2Speed;
             throw new Exception();
         }
         

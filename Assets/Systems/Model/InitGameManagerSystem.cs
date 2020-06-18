@@ -9,14 +9,14 @@ namespace SpaceInvadersLeoEcs.Systems.Model
     internal class InitGameManagerSystem : IEcsInitSystem
     {
         private readonly EcsWorld _world = null;
-        private readonly GameContext _gameContext = null;
+        private readonly SceneData _sceneData = null;
         public void Init()
         {
             var entity = _world.NewEntity();
-            entity.Replace(new Score());
+            entity.Get<Score>();
 
-            var wrapper = new WrapperUnityObject<Text>() {Value = _gameContext.ScoreText};
-            entity.Replace(wrapper);
+            var wrapper = new WrapperUnityObject<Text>() {Value = _sceneData.ScoreText};
+            entity.Get<WrapperUnityObject<Text>>() = wrapper;
         }
     }
 }

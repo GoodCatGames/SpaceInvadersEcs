@@ -13,6 +13,7 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
     {
         // auto-injected fields.
         private readonly GameContext _gameContext = null;
+        private readonly SceneData _sceneData = null;
         private readonly AudioService _audioService = null;
 
         private readonly EcsFilter<ChangeGameStateRequest> _filter = null;
@@ -36,7 +37,7 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
                     case GameStates.GameOver:
                         Time.timeScale = 0f;
                         SetSplashScreen(true);
-                        _gameContext.SplashScreenScore.text = GetScoreText();
+                        _sceneData.SplashScreenScore.text = GetScoreText();
                         _audioService.Pause();
                         break;
                     
@@ -54,7 +55,7 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
             }
         }
 
-        private void SetSplashScreen(bool setActive) => _gameContext.SplashScreen.gameObject.SetActive(setActive);
+        private void SetSplashScreen(bool setActive) => _sceneData.SplashScreen.gameObject.SetActive(setActive);
 
         private string GetScoreText()
         {
