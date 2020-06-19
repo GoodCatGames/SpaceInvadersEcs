@@ -5,7 +5,7 @@ namespace SpaceInvadersLeoEcs.Extensions.Components
     internal struct ContainerComponents<T> 
         where T : struct
     {
-        public IList<T> List => _list ?? (_list = new List<T>());
+        public List<T> List => _list ?? (_list = new List<T>());
         private List<T> _list;
     }
 }

@@ -13,5 +13,7 @@ namespace SpaceInvadersLeoEcs.AppData
         public float Player2Speed = default;
         
         public GameObject GunUndicatorPrefab = default;
+
+        public string mobBlueprintsPath = "Blueprints/Mobs/";
     }
 }

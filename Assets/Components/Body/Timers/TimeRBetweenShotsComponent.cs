@@ -1,7 +1,7 @@
 ﻿namespace SpaceInvadersLeoEcs.Components.Body.Timers
 {
-    internal struct TimeRBetweenShotsComponent : ITimer
+    internal struct TimeRBetweenShotsComponent
     {
-        public float TimeLostSec { get; set; }
+        public float TimeLostSec; 
     }
 }

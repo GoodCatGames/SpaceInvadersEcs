@@ -2,5 +2,7 @@
 
 namespace SpaceInvadersLeoEcs.Components.Body.Gun
 {
-    internal struct IsBulletComponent : IEcsIgnoreInFilter { }
+    internal struct IsBulletComponent : IEcsIgnoreInFilter
+    {
+    }
 }

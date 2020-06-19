@@ -9,7 +9,7 @@ namespace SpaceInvadersLeoEcs.AppData
 {
     internal class GameContext
     {
-        public GameStates GameState;
+        public GameStates GameState = default;
         public Vector2 MaxBorderGameField = default;
         public Vector2 MinBorderGameField = default;
 

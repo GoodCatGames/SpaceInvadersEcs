@@ -14,21 +14,17 @@ namespace SpaceInvadersLeoEcs.Blueprints
     public class BulletBlueprint : Blueprint
     {
         [SerializeField] private Vector2 direction = Vector2.up;
-        [SerializeField] private HealthBase healthBase = new HealthBase() { Value = 1};
+        [SerializeField] private HealthBaseComponent healthBaseComponent = new HealthBaseComponent() { Value = 1};
         [SerializeField] private int damage = 1;
         
         public override EcsEntity CreateEntity(EcsWorld world)
         {
             var entity = world.NewEntity();
-            
             entity.Get<IsBulletComponent>();
-
-            ref var moveComponent = ref entity.Get<MoveComponent>();
-            moveComponent.Direct = direction;
-            
-            entity.Replace(healthBase);
-            entity.Replace(new HealthCurrent() {Value = healthBase.Value});
-            entity.Replace(new ContainerDamage() {DamageRequest = new MakeDamageRequest() {Damage = damage}});
+            entity.Get<MoveComponent>().Direct = direction;
+            entity.Get<HealthBaseComponent>() = healthBaseComponent;
+            entity.Get<HealthCurrentComponent>().Value = healthBaseComponent.Value;
+            entity.Get<ContainerDamageComponent>().DamageRequest = new MakeDamageRequest() {Damage = damage};
             return entity;
         }
     }

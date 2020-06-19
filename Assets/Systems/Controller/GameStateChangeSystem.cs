@@ -17,13 +17,13 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
         private readonly AudioService _audioService = null;
 
         private readonly EcsFilter<ChangeGameStateRequest> _filter = null;
-        private readonly EcsFilter<Score> _filterScore = null;
+        private readonly EcsFilter<ScoreComponent> _filterScore = null;
 
         void IEcsRunSystem.Run()
         {
             foreach (var i in _filter)
             {
-                var changeGameStateEvent = _filter.Get1(i);
+                ref var changeGameStateEvent = ref _filter.Get1(i);
                 _gameContext.GameState = changeGameStateEvent.State;
                 switch (changeGameStateEvent.State)
                 {

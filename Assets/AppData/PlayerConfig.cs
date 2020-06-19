@@ -7,8 +7,7 @@ namespace SpaceInvadersLeoEcs.AppData
     [Serializable]
     public class PlayerConfig
     {
-        //public Transform Transform;
-        public GunBlueprint GunPlayer;
-        public float Speed;
+        public GunBlueprint GunPlayer = default;
+        public float Speed = 0f;
     }
 }

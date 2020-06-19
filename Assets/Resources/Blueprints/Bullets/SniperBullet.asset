@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SniperBullet
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 1}
-  healthBase:
+  healthBaseComponent:
     Value: 3
   damage: 3

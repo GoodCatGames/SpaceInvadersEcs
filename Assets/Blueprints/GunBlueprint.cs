@@ -11,23 +11,24 @@ namespace SpaceInvadersLeoEcs.Blueprints
     [Serializable]
     public class GunBlueprint : Blueprint
     {
-        [SerializeField] private BulletBlueprint _bulletBlueprint;
-        [SerializeField] private BulletSpeed _bulletSpeed = new BulletSpeed() {Value = 100f};
-        [SerializeField] private AmmoCapacity _ammoCapacity = new AmmoCapacity() {Value = 6};
-        [SerializeField] private TimeBetweenShotsSetupComponent _timeBetweenShotsSetupComponent =
+        [SerializeField] private BulletBlueprint bulletBlueprint = default;
+        [SerializeField] private BulletSpeedComponent bulletSpeedComponent = new BulletSpeedComponent() {Value = 100f};
+        [SerializeField] private AmmoCapacityComponent ammoCapacityComponent = new AmmoCapacityComponent() {Value = 6};
+
+        [SerializeField] private TimeBetweenShotsSetupComponent timeBetweenShotsSetupComponent =
             new TimeBetweenShotsSetupComponent() {TimeSec = 0.15f};
-        
-        [SerializeField] private ReloadGunComponent _reloadGunComponent = new ReloadGunComponent() {TimeReloadSec = 2};
+
+        [SerializeField] private ReloadGunComponent reloadGunComponent = new ReloadGunComponent() {TimeReloadSec = 2};
+
         public override EcsEntity CreateEntity(EcsWorld world)
         {
             var gun = world.NewEntity();
             gun.Get<IsCanShootComponent>();
-
-            gun.Replace(_bulletSpeed);
-            gun.Replace(_timeBetweenShotsSetupComponent);
-            gun.Replace(_ammoCapacity);
-            gun.Replace(_reloadGunComponent);
-            gun.Replace(new BlueprintRefComponent<BulletBlueprint>() {Value = _bulletBlueprint});
+            gun.Get<BulletSpeedComponent>() = bulletSpeedComponent;
+            gun.Get<TimeBetweenShotsSetupComponent>() = timeBetweenShotsSetupComponent;
+            gun.Get<AmmoCapacityComponent>() = ammoCapacityComponent;
+            gun.Get<ReloadGunComponent>() = reloadGunComponent;
+            gun.Get<BlueprintRefComponent<BulletBlueprint>>().Value = bulletBlueprint;
             return gun;
         }
     }

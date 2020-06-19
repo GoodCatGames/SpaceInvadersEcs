@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f030ce5c88b409a45acb0cad1e39705c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Configuration: {fileID: 11400000, guid: 311a8bafd06d3a64da2ee9980384ba8f, type: 2}
+  GameConfiguration: {fileID: 11400000, guid: 311a8bafd06d3a64da2ee9980384ba8f, type: 2}
 --- !u!4 &324185826
 Transform:
   m_ObjectHideFlags: 0

@@ -11,22 +11,20 @@ namespace SpaceInvadersLeoEcs.Blueprints
     [Serializable]
     public class MobBlueprint : Blueprint
     {
-        [SerializeField] private float speed;
-        [SerializeField] private HealthBase healthBase;
-        [SerializeField] private BulletResistance bulletResistance;
-        
+        [SerializeField] private float speed = default;
+        [SerializeField] private HealthBaseComponent healthBaseComponent = default;
+        [SerializeField] private BulletResistanceComponent bulletResistanceComponent = default;
+
         public override EcsEntity CreateEntity(EcsWorld world)
         {
             var entity = world.NewEntity();
-            entity.Replace(new IsMob());
-            entity.Replace(new PowerGameDesignBase());
-            entity.Replace(new PowerGameDesignCurrent());
-            
-            entity.Replace(new MoveComponent() {Direct = Vector2.down, Speed = speed});
-
-            entity.Replace(healthBase);
-            entity.Replace(bulletResistance);
-            entity.Replace(new HealthCurrent() {Value = healthBase.Value});
+            entity.Get<IsMobComponent>();
+            entity.Get<PowerGameDesignBaseComponent>();
+            entity.Get<PowerGameDesignCurrentComponent>();
+            entity.Get<MoveComponent>() = new MoveComponent() {Direct = Vector2.down, Speed = speed};
+            entity.Get<HealthBaseComponent>() = healthBaseComponent;
+            entity.Get<BulletResistanceComponent>() = bulletResistanceComponent;
+            entity.Get<HealthCurrentComponent>().Value = healthBaseComponent.Value;
             return entity;
         }
     }

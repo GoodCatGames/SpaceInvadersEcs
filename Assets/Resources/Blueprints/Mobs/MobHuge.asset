@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MobHuge
   m_EditorClassIdentifier: 
   speed: 0.5
-  healthBase:
+  healthBaseComponent:
     Value: 3
-  resistance:
+  bulletResistanceComponent:
     Value: 1

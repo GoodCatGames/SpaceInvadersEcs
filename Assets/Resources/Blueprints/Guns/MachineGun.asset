@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54eef17b943433488d364ce55be087c, type: 3}
   m_Name: MachineGun
   m_EditorClassIdentifier: 
-  _bulletBlueprint: {fileID: 11400000, guid: 3d6725a4d7dd44845891cc85ba66ef67, type: 2}
-  _bulletSpeed:
+  bulletBlueprint: {fileID: 11400000, guid: 3d6725a4d7dd44845891cc85ba66ef67, type: 2}
+  bulletSpeedComponent:
     Value: 100
-  _ammoCapacity:
+  ammoCapacity:
     Value: 30
-  _timeBetweenShotsSetupComponent:
+  timeBetweenShotsSetupComponent:
     TimeSec: 0.15
-  _reloadGunComponent:
-    TimeSec: 2
+  reloadGunComponent:
+    TimeReloadSec: 2

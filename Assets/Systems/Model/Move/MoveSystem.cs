@@ -5,7 +5,7 @@ using SpaceInvadersLeoEcs.Components.Events;
 
 namespace SpaceInvadersLeoEcs.Systems.Model.Move
 {
-    sealed class MoveSystem : IEcsRunSystem
+    internal sealed class MoveSystem : IEcsRunSystem
     {
         // auto-injected fields.
         private readonly EcsFilter<MoveComponent, ViewObjectComponent> _filter = null;
@@ -14,15 +14,14 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Move
         {
             foreach (var i in _filter)
             {
-                var moveComponent = _filter.Get1(i);
-                var viewObjectComponent = _filter.Get2(i);
+                ref var moveComponent = ref _filter.Get1(i);
+                ref var viewObjectComponent = ref _filter.Get2(i);
                 
-                var positionOld = viewObjectComponent.ViewObject.Position;
                 viewObjectComponent.ViewObject.MoveTo(moveComponent.Direct * moveComponent.Speed); 
                 var positionNew = viewObjectComponent.ViewObject.Position;
 
-                var entity = _filter.GetEntity(i);
-                entity.Replace(new ChangePositionEvent() {positionOld = positionOld, positionNew = positionNew});
+                ref var entity = ref _filter.GetEntity(i);
+                entity.Get<ChangePositionEvent>().positionNew = positionNew;
             }
         }
     }

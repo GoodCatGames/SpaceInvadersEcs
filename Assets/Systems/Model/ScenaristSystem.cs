@@ -1,10 +1,8 @@
-﻿using System.Linq;
-using Leopotam.Ecs;
+﻿using Leopotam.Ecs;
 using SpaceInvadersLeoEcs.Components.Body;
 using SpaceInvadersLeoEcs.Components.Body.GameManager;
 using SpaceInvadersLeoEcs.Components.Body.Mob;
 using SpaceInvadersLeoEcs.Components.Requests;
-using SpaceInvadersLeoEcs.Extensions;
 using UnityEngine;
 
 namespace SpaceInvadersLeoEcs.Systems.Model
@@ -16,14 +14,14 @@ namespace SpaceInvadersLeoEcs.Systems.Model
         // auto-injected fields.
         private readonly EcsWorld _world = null;
 
-        private readonly EcsFilter<PowerGameDesignCurrent, IsMob> _filter = null;
-        private readonly EcsFilter<Score> _filterScore = null;
+        private readonly EcsFilter<PowerGameDesignCurrentComponent, IsMobComponent> _filterMobsInGame = null;
+        private readonly EcsFilter<ScoreComponent> _filterScore = null;
 
         private float _timer;
         
         void IEcsRunSystem.Run()
         {
-            // timer
+            // Timer
             if (_timer > 0)
             {
                 _timer -= Time.deltaTime;
@@ -36,13 +34,24 @@ namespace SpaceInvadersLeoEcs.Systems.Model
             
             // CreateMobsRequest
             var powerNeed = _filterScore.Get1(0).Value * 0.1f + 10f;
-            var powerMobSum = _filter.Get1ToArray().Sum(power => power.Power); 
+            var powerMobSum = GetPowerMobsInGame(); 
             var powerAdd = powerNeed - powerMobSum;
             if (powerAdd > 0)
             {
                 var entity = _world.NewEntity();
-                entity.Replace(new CreateMobsRequest() {PowerMobs = powerAdd});
+                entity.Get<CreateMobsRequest>().PowerMobs = powerAdd;
             }
+        }
+
+        private float GetPowerMobsInGame()
+        {
+            float sum = 0;
+            foreach (var i in _filterMobsInGame)
+            {
+                sum += _filterMobsInGame.Get1(i).Power;
+            }
+
+            return sum;
         }
     }
 }

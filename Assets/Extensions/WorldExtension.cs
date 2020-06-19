@@ -7,8 +7,8 @@ namespace SpaceInvadersLeoEcs.Extensions
         public static void SendMessage<T>(this EcsWorld world, T messageEvent)
             where T : struct
         {
-            var entity = world.NewEntity();
-            entity.Replace(messageEvent);
+            ref var eventComponent = ref world.NewEntity().Get<T>();
+            eventComponent = messageEvent;
         }
     }
 }

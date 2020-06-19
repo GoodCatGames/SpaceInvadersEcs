@@ -7,21 +7,19 @@ namespace SpaceInvadersLeoEcs.Systems.Model
     internal sealed class DestroyEntitySystem : IEcsRunSystem
     {
         // auto-injected fields.
-        private readonly EcsFilter<ViewObjectComponent, DestroyEntityRequest> _filterWithView = null;
-        private readonly EcsFilter<DestroyEntityRequest> _filterWithoutView = null;
+        private readonly EcsFilter<ViewObjectComponent, IsDestroyEntityRequest> _filterWithView = null;
+        private readonly EcsFilter<IsDestroyEntityRequest> _filterWithoutView = null;
 
         void IEcsRunSystem.Run()
         {
             foreach (var i in _filterWithView)
             {
-                var viewObjectComponent = _filterWithView.Get1(i);
-                viewObjectComponent.ViewObject.Destroy();
+                _filterWithView.Get1(i).ViewObject.Destroy();
             }
 
             foreach (var i in _filterWithoutView)
             {
-                var entity = _filterWithoutView.GetEntity(i);
-                entity.Destroy();
+                _filterWithoutView.GetEntity(i).Destroy();
             }
         }
     }

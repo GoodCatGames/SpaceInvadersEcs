@@ -1,7 +1,6 @@
 ﻿using Leopotam.Ecs;
 using SpaceInvadersLeoEcs.Components.Body;
 using SpaceInvadersLeoEcs.Components.Body.Mob;
-using SpaceInvadersLeoEcs.Extensions.Enitities;
 
 namespace SpaceInvadersLeoEcs.Services
 {
@@ -9,11 +8,11 @@ namespace SpaceInvadersLeoEcs.Services
     {
         public float EvaluateGameDesignPower(EcsEntity entity)
         {
-            entity.TryGet<MoveComponent>(out var moveComponent);
-            entity.TryGet<HealthCurrent>(out var healthCurrent);
-            entity.TryGet<BulletResistance>(out var resistance);
-            
-            var power = moveComponent.Speed + healthCurrent.Value + resistance.Value;
+            var speed = entity.Has<MoveComponent>() ? entity.Get<MoveComponent>().Speed : 0f;
+            var healthCurrent = entity.Has<HealthCurrentComponent>() ? entity.Get<HealthCurrentComponent>().Value : 0f;
+            var resistance = entity.Has<MoveComponent>() ? entity.Get<BulletResistanceComponent>().Value : 0f;
+
+            var power = speed + healthCurrent + resistance;
             return power;
         }
     }
