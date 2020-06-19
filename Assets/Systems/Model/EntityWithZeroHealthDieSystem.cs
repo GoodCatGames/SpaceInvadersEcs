@@ -4,7 +4,7 @@ using SpaceInvadersLeoEcs.Components.Requests;
 
 namespace SpaceInvadersLeoEcs.Systems.Model
 {
-    internal sealed class EntityDeathSystem : IEcsRunSystem
+    internal sealed class EntityWithZeroHealthDieSystem : IEcsRunSystem
     {
         // auto-injected fields.
         private readonly EcsFilter<HealthBaseComponent>.Exclude<HealthCurrentComponent> _filter = null;

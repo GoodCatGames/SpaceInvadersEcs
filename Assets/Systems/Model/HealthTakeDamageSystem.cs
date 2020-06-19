@@ -1,5 +1,4 @@
-﻿using System;
-using Leopotam.Ecs;
+﻿using Leopotam.Ecs;
 using SpaceInvadersLeoEcs.Components.Body;
 using SpaceInvadersLeoEcs.Components.Events;
 using SpaceInvadersLeoEcs.Components.Requests;

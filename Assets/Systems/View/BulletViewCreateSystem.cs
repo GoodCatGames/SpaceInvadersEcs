@@ -15,7 +15,7 @@ namespace SpaceInvadersLeoEcs.Systems.View
         private readonly AudioService _audioService = null;
         private readonly PoolsObject _poolsObject = null;
 
-        protected override void CreateView(in EcsEntity entity, Vector3 startPosition)
+        protected override Transform CreateView(in EcsEntity entity, Vector3 startPosition)
         {
             var poolObject = (PoolObjectExt)_poolsObject.Bullets.Get();
             var transform = poolObject.PoolTransform;
@@ -26,6 +26,7 @@ namespace SpaceInvadersLeoEcs.Systems.View
             entity.Get<ViewObjectComponent>().ViewObject = new ViewObjectUnity(transform, rigidbody2D, poolObject);
 
             _audioService.PlayShoot();
+            return transform;
         }
     }
 }

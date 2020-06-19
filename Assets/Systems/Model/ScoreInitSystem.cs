@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace SpaceInvadersLeoEcs.Systems.Model
 {
-    internal class GameManagerInitSystem : IEcsInitSystem
+    internal class ScoreInitSystem : IEcsInitSystem
     {
         private readonly EcsWorld _world = null;
         private readonly SceneData _sceneData = null;
@@ -14,8 +14,7 @@ namespace SpaceInvadersLeoEcs.Systems.Model
         void IEcsInitSystem.Init()
         {
             _world.NewEntity().Get<ScoreComponent>();
-            _world.NewEntity().Get<WrapperUnityObjectComponent<Text>>() = new WrapperUnityObjectComponent<Text>()
-                {Value = _sceneData.ScoreText};
+            _world.NewEntity().Get<WrapperUnityObjectComponent<Text>>().Value = _sceneData.ScoreText;
         }
     }
 }

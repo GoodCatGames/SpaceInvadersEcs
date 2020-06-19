@@ -5,7 +5,7 @@ using SpaceInvadersLeoEcs.Components.Requests;
 
 namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
 {
-    internal sealed class GunTimerBetweenShotsStart : IEcsRunSystem
+    internal sealed class GunTimerBetweenShotsStartSystem : IEcsRunSystem
     {
         // auto-injected fields.
         private readonly EcsFilter<TimeBetweenShotsSetupComponent, IsShotMakeRequest> _filter = null;

@@ -10,5 +10,10 @@ namespace SpaceInvadersLeoEcs.Extensions
             ref var eventComponent = ref world.NewEntity().Get<T>();
             eventComponent = messageEvent;
         }
+
+        public static bool IsAlive(this EcsWorld world)
+        {
+            return world.GetStats().ActiveEntities > 0;
+        }
     }
 }

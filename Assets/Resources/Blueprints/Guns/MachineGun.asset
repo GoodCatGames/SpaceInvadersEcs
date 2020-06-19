@@ -15,7 +15,7 @@ MonoBehaviour:
   bulletBlueprint: {fileID: 11400000, guid: 3d6725a4d7dd44845891cc85ba66ef67, type: 2}
   bulletSpeedComponent:
     Value: 100
-  ammoCapacity:
+  ammoCapacityComponent:
     Value: 30
   timeBetweenShotsSetupComponent:
     TimeSec: 0.15

@@ -4,7 +4,7 @@ using SpaceInvadersLeoEcs.Extensions;
 
 namespace SpaceInvadersLeoEcs.Systems.Model
 {
-    internal class GameInitSystem : IEcsInitSystem
+    internal class GameStartStateInitSystem : IEcsInitSystem
     {
         private readonly EcsWorld _world = null;
         

@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 namespace SpaceInvadersLeoEcs.Systems.Controller
 {
-    internal sealed class GameStateChangeSystem : IEcsRunSystem
+    internal sealed class GameStateChangeExecuteSystem : IEcsRunSystem
     {
         // auto-injected fields.
         private readonly GameContext _gameContext = null;

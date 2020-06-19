@@ -6,7 +6,7 @@ using SpaceInvadersLeoEcs.Extensions;
 
 namespace SpaceInvadersLeoEcs.Systems.Controller
 {
-    internal sealed class InputSystem : IEcsInitSystem, IEcsDestroySystem
+    internal sealed class InputInitSystem : IEcsInitSystem, IEcsDestroySystem
     {
         // auto-injected fields.
         private readonly EcsWorld _world = null;

@@ -8,6 +8,7 @@ using SpaceInvadersLeoEcs.Components.Body.UI;
 using SpaceInvadersLeoEcs.Components.Body.WrappersMonoBehaviour;
 using SpaceInvadersLeoEcs.Components.Requests;
 using SpaceInvadersLeoEcs.Extensions.Components;
+using SpaceInvadersLeoEcs.Extensions.UnityComponent;
 using SpaceInvadersLeoEcs.Systems.Model.Data;
 using UnityEngine;
 
@@ -45,6 +46,9 @@ namespace SpaceInvadersLeoEcs.Systems.Controller.Init
             entity.Get<MoveComponent>();
             entity.Get<HealthBaseComponent>().Value = 1;
             entity.Get<HealthCurrentComponent>().Value = 1;
+            
+            playerTransform.GetProvider().SetEntity(_world, entity);
+            
             return entity;
         }
 

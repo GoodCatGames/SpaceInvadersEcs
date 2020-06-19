@@ -1,15 +1,12 @@
 using Leopotam.Ecs;
-using LeopotamGroup.Globals;
 using SpaceInvadersLeoEcs.AppData;
 using SpaceInvadersLeoEcs.Components.Events;
 using SpaceInvadersLeoEcs.Components.Events.InputEvents;
 using SpaceInvadersLeoEcs.Components.Events.UnityEvents;
 using SpaceInvadersLeoEcs.Components.Requests;
 using SpaceInvadersLeoEcs.Extensions.Components;
-using SpaceInvadersLeoEcs.Extensions.Systems.Transform;
 using SpaceInvadersLeoEcs.Extensions.Systems.ViewCreate;
 using SpaceInvadersLeoEcs.Services;
-using SpaceInvadersLeoEcs.Systems;
 using SpaceInvadersLeoEcs.Systems.Blueprints;
 using SpaceInvadersLeoEcs.Systems.Controller;
 using SpaceInvadersLeoEcs.Systems.Controller.Init;
@@ -21,17 +18,17 @@ using UnityEngine;
 
 namespace SpaceInvadersLeoEcs
 {
-    sealed class GameStartup : MonoBehaviour
+    internal sealed class GameStartup : MonoBehaviour
     {
-        public GameConfiguration GameConfiguration = null;
+        public GameConfiguration gameConfiguration;
 
-        EcsWorld _world;
-        EcsSystems _systems;
+        private EcsWorld _world;
+        private EcsSystems _systems;
 
-        void Start()
+        private void Start()
         {
             var gameContext = new GameContext();
-            CalculateStartPowerMobs(gameContext, GameConfiguration);
+            CalculateStartPowerMobs(gameContext, gameConfiguration);
 
             _world = new EcsWorld();
             _systems = new EcsSystems(_world);
@@ -44,53 +41,54 @@ namespace SpaceInvadersLeoEcs
             _systems
 
                 // Controller (UiEvents, InputEvents, Init GameObjects on Scene(Create Entities)) 
-                .Add(new GameInitSystem())
                 .Add(new GameFieldBordersInitSystem())
-                .Add(new GameManagerInitSystem())
-                .Add(Service<Emitter>.Get(true))
+                .Add(new ScoreInitSystem())
                 .Add(new PlayerInitSystem())
-                .Add(new InputSystem())
-                .Add(new GameStateInputSystem())
-
-                // Model 
-                .Add(new GameManagerInitSystem())
-                .Add(new MoveInputSystem())
+                .Add(new InputInitSystem())
                 
+                // Model
+                .Add(new GameStartStateInitSystem())
+                
+                .Add(new GameStateInputSystem())
+                .Add(new MoveInputSystem())
                 .Add(new ShootInputSystem())
+                
                 .Add(new ShootDeniedTimeBetweenShotsSystem())
                 .Add(new ShootDeniedNoAmmoSystem())
                 .Add(new ShootDeniedReloadInProcessSystem())
                 .Add(new ShootExecuteSystem())
                 
                 .Add(new AmmoUsedSystem())
-                .Add(new GunTimerBetweenShotsStart())
+                .Add(new GunTimerBetweenShotsStartSystem())
                 .Add(new GunReloadStartSystem())
                 
                 .Add(new TimerTickSystem())
                 .Add(new GunReloadExecutedSystem())
                 
-                .Add(new MoveSystem())
+                .Add(new MoveExecuteSystem())
+                .Add(new PlayerMoveOutBorderSystem())
+                .Add(new UnityEventOnBecameInvisibleSystem())
+                
                 .Add(new BulletCollisionSystem())
                 .Add(new PlayerTakeDamageSystem())
                 .Add(new HealthTakeDamageSystem())
-                .Add(new EntityDeathSystem())
+                .Add(new EntityWithZeroHealthDieSystem())
                 
                 .Add(new PowerMobCalculateSystem())
                 .Add(new ScenaristSystem())
                 .Add(new MobSpawnSystem())
                 
-                .Add(new ScoreSystem())
+                .Add(new ScoreCalculateSystem())
                 .Add(new EntityDestroyChildrenDestroyedPlayer())
-                .Add(new DestroyEntitySystem())
+                .Add(new EntityDestroySystem())
                 .Add(new GameOverSystem())
-                .Add(new GameStateChangeSystem())
+                .Add(new GameStateChangeExecuteSystem())
 
                 // Viewer
-                .Add(new PlayerMoveBorderSystem())
-                .Add(new UnityEventOnBecameInvisibleSystem())
                 .Add(new GunIndicatorViewCreateSystem())
                 .Add(new BulletViewCreateSystem())
                 .Add(new MobViewCreateSystem())
+                
                 .Add(new MobViewUpdateSystem())
                 .Add(new LaserRayForGunUpdateSystem())
                 .Add(new GunIndicatorViewUpdateSystem())
@@ -120,7 +118,7 @@ namespace SpaceInvadersLeoEcs
                 .OneFrame<OnCollisionEnter2DEvent>()
 
                 // inject 
-                .Inject(GameConfiguration)
+                .Inject(gameConfiguration)
                 .Inject(GetComponent<SceneData>())
                 .Inject(gameContext)
                 .Inject(new PoolsObject())
@@ -129,7 +127,7 @@ namespace SpaceInvadersLeoEcs
                 .Init();
         }
 
-        private void CalculateStartPowerMobs(GameContext gameContext, GameConfiguration gameConfiguration)
+        private void CalculateStartPowerMobs(GameContext gameContext, GameConfiguration gameConfig)
         {
             var worldCalculateStartPowerMobs = new EcsWorld();
             var systemsBlueprints = new EcsSystems(worldCalculateStartPowerMobs);
@@ -138,19 +136,19 @@ namespace SpaceInvadersLeoEcs
                 .Add(new PowerMobCalculateSystem())
                 .Add(new MobPowerSaveSystem())
                 .Inject(gameContext)
-                .Inject(gameConfiguration)
+                .Inject(gameConfig)
                 .Inject(new EvaluateService())
                 .Init();
 
             systemsBlueprints.Run();
         }
 
-        void Update()
+        private void Update()
         {
             _systems?.Run();
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             if (_systems != null)
             {

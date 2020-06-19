@@ -1,7 +1,6 @@
 ﻿using System;
 using Leopotam.Ecs;
 using SpaceInvadersLeoEcs.Components.Body.Gun;
-using SpaceInvadersLeoEcs.Components.Body.Timers;
 using SpaceInvadersLeoEcs.Extensions.Blueprints;
 using UnityEngine;
 

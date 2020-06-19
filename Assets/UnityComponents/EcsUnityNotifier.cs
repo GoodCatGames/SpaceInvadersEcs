@@ -1,24 +1,29 @@
-﻿using LeopotamGroup.Globals;
+﻿using Leopotam.Ecs;
 using SpaceInvadersLeoEcs.Components.Events.UnityEvents;
-using SpaceInvadersLeoEcs.Extensions.Systems.Transform;
+using SpaceInvadersLeoEcs.Extensions;
+using SpaceInvadersLeoEcs.Extensions.UnityComponent;
 using UnityEngine;
 
 namespace SpaceInvadersLeoEcs.UnityComponents
 {
-    public class EcsUnityNotifier : MonoBehaviour
+    public class EcsUnityNotifier : EcsUnityNotifierBase
     {
         private void OnBecameInvisible()
         {
-            var onBecameInvisibleEvent = new OnBecameInvisibleEvent();
-            transform.AddEcsEvent(onBecameInvisibleEvent);
+            if(!World.IsAlive()) return;
+            Entity.AddEventToStack<OnBecameInvisibleEvent>();
         }
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            var otherEntityExist = Service<Emitter>.Get().TryGetEntity(other.transform, out var entityOther);
-            if(!otherEntityExist) return;
-            var collisionEnter2DEvent = new OnCollisionEnter2DEvent() {Other = entityOther};
-            transform.AddEcsEvent(collisionEnter2DEvent);
+            if(!World.IsAlive()) return;
+            
+            var otherTransform = other.transform;
+            if (!otherTransform.HasProvider()) return;
+
+            var otherEntity = otherTransform.GetProvider().Entity;
+            if (!otherEntity.IsAlive()) return;
+            Entity.AddEventToStack(new OnCollisionEnter2DEvent() {Other = otherEntity});
         }
     }
 }

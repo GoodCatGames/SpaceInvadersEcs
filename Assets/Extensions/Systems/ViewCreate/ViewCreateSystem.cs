@@ -1,6 +1,7 @@
 ﻿using Leopotam.Ecs;
 using SpaceInvadersLeoEcs.Components.Body.WrappersMonoBehaviour;
 using SpaceInvadersLeoEcs.Components.Requests;
+using SpaceInvadersLeoEcs.Extensions.UnityComponent;
 using UnityEngine;
 
 namespace SpaceInvadersLeoEcs.Extensions.Systems.ViewCreate
@@ -17,11 +18,17 @@ namespace SpaceInvadersLeoEcs.Extensions.Systems.ViewCreate
             {
                 ref var entity = ref _filter.GetEntity(i);
                 var startPosition = _filter.Get1(i).StartPosition;
-                CreateView(entity, startPosition);
+
                 entity.Get<IsViewCreatedEvent>();
+                
+                var transform = CreateView(entity, startPosition);
+                var provider = transform.GetProvider();
+                provider.SetEntity(_world, entity);
             }
         }
+
+        protected abstract UnityEngine.Transform CreateView(in EcsEntity entity, Vector3 startPosition);
+
         
-        protected abstract void CreateView(in EcsEntity entity, Vector3 startPosition);
     }
 }

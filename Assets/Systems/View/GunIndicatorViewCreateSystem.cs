@@ -16,7 +16,7 @@ namespace SpaceInvadersLeoEcs.Systems.View
         private readonly SceneData _sceneData = null;
         private readonly GameConfiguration _gameConfiguration = null;
         
-        protected override void CreateView(in EcsEntity entity, Vector3 startPosition)
+        protected override Transform CreateView(in EcsEntity entity, Vector3 startPosition)
         {
             var gunIndicatorPrefab = _gameConfiguration.GunUndicatorPrefab;
             
@@ -28,6 +28,8 @@ namespace SpaceInvadersLeoEcs.Systems.View
             
             var text = transform.GetComponent<Text>();
             entity.Get<WrapperUnityObjectComponent<Text>>().Value = text;
+            
+            return transform;
         }
     }
 }

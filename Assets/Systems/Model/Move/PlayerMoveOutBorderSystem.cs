@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace SpaceInvadersLeoEcs.Systems.Model.Move
 {
-    internal sealed class PlayerMoveBorderSystem : IEcsRunSystem
+    internal sealed class PlayerMoveOutBorderSystem : IEcsRunSystem
     {
         // auto-injected fields.
         private readonly GameContext _gameContext = null;

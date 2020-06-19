@@ -4,7 +4,7 @@ using SpaceInvadersLeoEcs.Components.Requests;
 
 namespace SpaceInvadersLeoEcs.Systems.Model
 {
-    internal sealed class DestroyEntitySystem : IEcsRunSystem
+    internal sealed class EntityDestroySystem : IEcsRunSystem
     {
         // auto-injected fields.
         private readonly EcsFilter<ViewObjectComponent, IsDestroyEntityRequest> _filterWithView = null;

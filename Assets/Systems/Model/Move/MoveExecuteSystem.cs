@@ -5,7 +5,7 @@ using SpaceInvadersLeoEcs.Components.Events;
 
 namespace SpaceInvadersLeoEcs.Systems.Model.Move
 {
-    internal sealed class MoveSystem : IEcsRunSystem
+    internal sealed class MoveExecuteSystem : IEcsRunSystem
     {
         // auto-injected fields.
         private readonly EcsFilter<MoveComponent, ViewObjectComponent> _filter = null;

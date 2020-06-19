@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace SpaceInvadersLeoEcs.Systems.Model
 {
-    internal sealed class ScoreSystem : IEcsRunSystem
+    internal sealed class ScoreCalculateSystem : IEcsRunSystem
     {
         // auto-injected fields.
         private readonly EcsFilter<PowerGameDesignBaseComponent, IsDestroyEntityRequest, IsMobComponent> _filterDeathMobs = null;
