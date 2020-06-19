@@ -1,4 +1,5 @@
-﻿using SpaceInvadersLeoEcs.UnityComponents;
+﻿using SpaceInvadersLeoEcs.Extensions.UnityComponents;
+using SpaceInvadersLeoEcs.UnityComponents;
 using UnityEngine;
 
 namespace SpaceInvadersLeoEcs.Extensions.UnityComponent
@@ -22,7 +23,7 @@ namespace SpaceInvadersLeoEcs.Extensions.UnityComponent
         public static bool HasProvider(this Component component)
         {
             var gameObject = component.gameObject;
-            var providerExist = gameObject.TryGetComponent<IEcsUnityProvider>(out var provider);
+            var providerExist = gameObject.TryGetComponent<IEcsUnityProvider>(out _);
             return providerExist;
         }
     }

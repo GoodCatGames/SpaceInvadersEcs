@@ -27,14 +27,14 @@ namespace SpaceInvadersLeoEcs.Systems.Controller.Init
             if (_sceneData.Player2 != null) InitPlayer(_sceneData.Player2, 2, _gameConfiguration.Player2Gun);
         }
 
-        private void InitPlayer(Transform playerTransform, int numberPlayer, GunBlueprint gunBlueprint)
+        private void InitPlayer(Transform playerTransform, in int numberPlayer, GunBlueprint gunBlueprint)
         {
             var player = CreatePlayer(playerTransform, numberPlayer);
             SetStartGun(player, gunBlueprint);
             CreateGunIndicator(player);
         }
 
-        private EcsEntity CreatePlayer(Transform playerTransform, int numberPlayer)
+        private EcsEntity CreatePlayer(Transform playerTransform, in int numberPlayer)
         {
             if (playerTransform == null) return default;
             var rigidBody2D = playerTransform.GetComponent<Rigidbody2D>();

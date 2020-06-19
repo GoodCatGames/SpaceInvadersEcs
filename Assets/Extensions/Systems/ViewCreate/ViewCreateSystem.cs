@@ -27,8 +27,6 @@ namespace SpaceInvadersLeoEcs.Extensions.Systems.ViewCreate
             }
         }
 
-        protected abstract UnityEngine.Transform CreateView(in EcsEntity entity, Vector3 startPosition);
-
-        
+        protected abstract Transform CreateView(in EcsEntity entity, in Vector3 startPosition);
     }
 }

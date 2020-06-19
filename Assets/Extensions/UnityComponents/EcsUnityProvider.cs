@@ -2,31 +2,29 @@
 using Leopotam.Ecs;
 using UnityEngine;
 
-namespace SpaceInvadersLeoEcs.UnityComponents
+namespace SpaceInvadersLeoEcs.Extensions.UnityComponents
 {
     public class EcsUnityProvider : MonoBehaviour, IEcsUnityProvider
     {
-        public EcsWorld World
+        public ref EcsWorld World
         {
             get
             {
                 if(_world == default) throw new Exception("Entity is not assigned!");
-                return _world;
+                return ref _world;
             }
-            set => _world = value;
         }
 
         private EcsWorld _world;
 
         
-        public EcsEntity Entity
+        public ref EcsEntity Entity
         {
             get
             {
                 if(_entity == default) throw new Exception("Entity is not assigned!");
-                return _entity;
+                return ref _entity;
             }
-            set => _entity = value;
         }
 
         private EcsEntity _entity;

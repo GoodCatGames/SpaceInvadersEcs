@@ -2,6 +2,7 @@
 using SpaceInvadersLeoEcs.Components.Events.UnityEvents;
 using SpaceInvadersLeoEcs.Extensions;
 using SpaceInvadersLeoEcs.Extensions.UnityComponent;
+using SpaceInvadersLeoEcs.Extensions.UnityComponents;
 using UnityEngine;
 
 namespace SpaceInvadersLeoEcs.UnityComponents

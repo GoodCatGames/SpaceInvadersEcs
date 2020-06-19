@@ -11,7 +11,7 @@ namespace SpaceInvadersLeoEcs.Helpers
     internal static class FilterExtensions
     {
         public static EcsEntity GetGunOfPlayer(this EcsFilter<IsCanShootComponent, OwnerPlayerComponent> guns,
-            int playerNumber)
+            in int playerNumber)
         {
             foreach (var i in guns)
             {
@@ -29,7 +29,7 @@ namespace SpaceInvadersLeoEcs.Helpers
 
         public static Text GetIndicator(this
                 EcsFilter<WrapperUnityObjectComponent<Text>, OwnerPlayerComponent, IsGunIndicatorComponent> indicators,
-            int numberPlayer)
+            in int numberPlayer)
         {
             foreach (var i in indicators)
             {

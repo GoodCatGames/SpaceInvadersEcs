@@ -14,7 +14,7 @@ namespace SpaceInvadersLeoEcs.Systems.View
         // auto-injected fields.
         private readonly PoolsObject _poolsObject = null;
        
-        protected override Transform CreateView(in EcsEntity entity, Vector3 startPosition)
+        protected override Transform CreateView(in EcsEntity entity, in Vector3 startPosition)
         {
             var poolObject = _poolsObject.Mobs.Get();
             var transform = poolObject.PoolTransform;

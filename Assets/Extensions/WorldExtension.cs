@@ -11,9 +11,6 @@ namespace SpaceInvadersLeoEcs.Extensions
             eventComponent = messageEvent;
         }
 
-        public static bool IsAlive(this EcsWorld world)
-        {
-            return world.GetStats().ActiveEntities > 0;
-        }
+        public static bool IsAlive(this EcsWorld world) => world.GetStats().ActiveEntities > 0;
     }
 }

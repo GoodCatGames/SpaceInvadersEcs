@@ -37,13 +37,13 @@ namespace SpaceInvadersLeoEcs.Services
         
         public void PlayShoot() => _audioSourceShot.PlayOneShot(shot, 0.25f);
 
-        public void StartPlayReloadPlayer(int numberPlayer)
+        public void StartPlayReloadPlayer(in int numberPlayer)
         {
             if (numberPlayer == 1) StartPlayReloadPlayer1();
             if (numberPlayer == 2) StartPlayReloadPlayer2();
         }
 
-        public void StopPlayReload(int numberPlayer)
+        public void StopPlayReload(in int numberPlayer)
         {
             if (numberPlayer == 1) StopPlayReloadPlayer1();
             if (numberPlayer == 2) StopPlayReloadPlayer2();
