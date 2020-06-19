@@ -23,7 +23,7 @@ namespace SpaceInvadersLeoEcs.Extensions.Systems.ViewCreate
                 
                 var transform = CreateView(entity, startPosition);
                 var provider = transform.GetProvider();
-                provider.SetEntity(_world, entity);
+                provider.SetEntity(entity);
             }
         }
 

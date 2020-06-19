@@ -39,7 +39,7 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
             }
         }
 
-        private void ProcessShootEvent(int numberPlayer, bool isPressed)
+        private void ProcessShootEvent(in int numberPlayer, in bool isPressed)
         {
             var gun = _filterGuns.GetGunOfPlayer(numberPlayer);
             
@@ -53,7 +53,7 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
             }
         }
 
-        private void MakeShooting(ref EcsEntity gun, Vector2 direction) => gun.Get<ShootingComponent>().Direction = direction;
+        private void MakeShooting(ref EcsEntity gun, in Vector2 direction) => gun.Get<ShootingComponent>().Direction = direction;
 
         private void CancelShooting(ref EcsEntity gun) => gun.Del<ShootingComponent>();
     }

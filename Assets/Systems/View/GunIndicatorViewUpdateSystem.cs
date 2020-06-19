@@ -65,13 +65,7 @@ namespace SpaceInvadersLeoEcs.Systems.View
         {
             var indicator = GetIndicator(gun);
             if (indicator == null) return;
-
-            var ammo = 0;
-            if (gun.Has<AmmoComponent>())
-            {
-                ammo = gun.Get<AmmoComponent>().Value;
-            }
-            
+            var ammo = gun.Has<AmmoComponent>() ? gun.Get<AmmoComponent>().Value : 0;
             ref var ammoCapacity = ref gun.Get<AmmoCapacityComponent>();
             SetAmmoState(indicator, ammo, ammoCapacity.Value);
         }

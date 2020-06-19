@@ -7,7 +7,6 @@ namespace SpaceInvadersLeoEcs.Extensions.UnityComponents
     public abstract class EcsUnityNotifierBase : MonoBehaviour
     {
         protected ref EcsEntity Entity => ref Provider.Entity;
-        protected ref EcsWorld World => ref Provider.World;
 
         private IEcsUnityProvider Provider
         {

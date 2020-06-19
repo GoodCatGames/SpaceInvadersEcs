@@ -30,7 +30,7 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Move
             }
         }
 
-        private bool IsOutBorder(Vector2 position, out Vector2 borderPosition)
+        private bool IsOutBorder(in Vector2 position, out Vector2 borderPosition)
         {
             var delta = 0.01f;
             borderPosition = position;

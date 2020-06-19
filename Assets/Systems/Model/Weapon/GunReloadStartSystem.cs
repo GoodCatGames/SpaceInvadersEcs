@@ -63,7 +63,7 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
             }
         }
 
-        private void ReloadStart(in EcsEntity gun, float timeSec)
+        private void ReloadStart(in EcsEntity gun, in float timeSec)
         {
             gun.Get<IsReloadStartEvent>();
             gun.Get<IsReloadGunInProcessComponent>();

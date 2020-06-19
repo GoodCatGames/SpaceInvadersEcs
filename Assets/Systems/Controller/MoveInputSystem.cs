@@ -33,7 +33,7 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
             }
         }
 
-        private void ProcessMove(int numberPlayer, bool doMove, Vector2 direction = new Vector2())
+        private void ProcessMove(in int numberPlayer, in bool doMove, in Vector2 direction = new Vector2())
         {
             foreach (var i in _filterMove)
             {
@@ -53,20 +53,20 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
             }
         }
 
-        private bool IsPlayerWithNumber(int numberPlayer, int indexFilter)
+        private bool IsPlayerWithNumber(in int numberPlayer, in int indexFilter)
         {
             var playerComponent = _filterMove.Get1(indexFilter);
             return playerComponent.Number == numberPlayer;
         }
 
-        private float GetSpeedPlayer(int numberPlayer)
+        private float GetSpeedPlayer(in int numberPlayer)
         {
             if (numberPlayer == 1) return _gameConfiguration.Player1Speed;
             if (numberPlayer == 2) return _gameConfiguration.Player2Speed;
             throw new Exception();
         }
 
-        private void MovePlayer(ref MoveComponent component, Vector2 direction, float speed)
+        private void MovePlayer(ref MoveComponent component, in Vector2 direction, in float speed)
         {
             component.Speed = speed;
             component.Direct = direction;
@@ -77,6 +77,6 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
             component.Speed = 0;
         }
 
-        private Vector2 GetDirection(float axis) => axis >= 0 ? Vector2.right : Vector2.left;
+        private Vector2 GetDirection(in float axis) => axis >= 0 ? Vector2.right : Vector2.left;
     }
 }

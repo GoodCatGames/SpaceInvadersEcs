@@ -17,8 +17,8 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
                 ref var ammoCapacity = ref _filter.Get1(i);
                 ref var gun = ref _filter.GetEntity(i);
                 gun.Get<AmmoComponent>().Value = ammoCapacity.Value;
-                gun.Del<IsReloadGunInProcessComponent>();
                 gun.Get<IsReloadEndEvent>();
+                gun.Del<IsReloadGunInProcessComponent>();
             }
         }
     }

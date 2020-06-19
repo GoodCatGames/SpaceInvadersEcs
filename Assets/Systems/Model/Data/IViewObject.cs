@@ -6,7 +6,7 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Data
     {
         Vector2 Position { get; set; }
 
-        void MoveTo(Vector2 vector2);
+        void MoveTo(in Vector2 vector2);
         void Destroy();
     }
 }

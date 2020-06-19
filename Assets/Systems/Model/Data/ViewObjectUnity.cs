@@ -31,7 +31,7 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Data
             _poolObject = poolObject;
         }
 
-        public void MoveTo(Vector2 vector2)
+        public void MoveTo(in Vector2 vector2)
         {
             if (_rigidbody2D != null)
             {

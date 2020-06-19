@@ -32,6 +32,6 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
             }
         }
 
-        private void SetGameState(GameStates gameState) => _world.SendMessage(new ChangeGameStateRequest() {State = gameState});
+        private void SetGameState(in GameStates gameState) => _world.SendMessage(new ChangeGameStateRequest() {State = gameState});
     }
 }

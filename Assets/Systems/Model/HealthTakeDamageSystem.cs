@@ -20,7 +20,7 @@ namespace SpaceInvadersLeoEcs.Systems.Model
                 var healthCurrentValue = healthCurrent.Value - makeDamageRequest.Damage;
                 healthCurrent.Value = Mathf.Clamp(healthCurrentValue, 0, int.MaxValue);
 
-                var entity = _filter.GetEntity(i);
+                ref var entity = ref _filter.GetEntity(i);
                 if (healthCurrent.Value == 0)
                 {
                     entity.Del<HealthCurrentComponent>();

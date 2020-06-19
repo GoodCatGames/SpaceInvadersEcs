@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.leopotam.ecs": "https://github.com/Leopotam/ecs.git",
+    "com.leopotam.ecs": "https://github.com/Leopotam/ecs.git#develop",
     "com.leopotam.ecs-ui": "https://github.com/Leopotam/ecs-ui.git",
     "com.leopotam.ecs-unityintegration": "https://github.com/Leopotam/ecs-unityintegration.git",
     "com.leopotam.globals": "https://github.com/Leopotam/globals.git",
@@ -51,10 +51,6 @@
     "com.unity.modules.xr": "1.0.0"
   },
   "lock": {
-    "com.leopotam.ecs": {
-      "revision": "HEAD",
-      "hash": "efa43fb079d148571933c3915c72a22c67c72464"
-    },
     "com.leopotam.ecs-ui": {
       "revision": "HEAD",
       "hash": "a10621344c19ee0558e46d6fc88659baca087805"
@@ -66,6 +62,10 @@
     "com.leopotam.globals": {
       "revision": "HEAD",
       "hash": "740d6ddbd9ed39947f2153c63bc2654d04e5b8c8"
+    },
+    "com.leopotam.ecs": {
+      "revision": "develop",
+      "hash": "9520d47753ccbd1bd7889a431fb0ff9d2196cccb"
     }
   }
 }

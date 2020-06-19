@@ -35,7 +35,7 @@ namespace SpaceInvadersLeoEcs.Systems.Model
             }
         }
 
-        private int GetCalculateBulletHealthCurrent(in EcsEntity bullet, int healthCurrent)
+        private int GetCalculateBulletHealthCurrent(in EcsEntity bullet, in int healthCurrent)
         {
             var damage  = bullet.Has<MakeDamageRequest>() ? bullet.Get<MakeDamageRequest>().Damage : 0;
             return Mathf.Clamp(healthCurrent - damage, 0, int.MaxValue);

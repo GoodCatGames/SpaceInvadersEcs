@@ -6,7 +6,7 @@ namespace SpaceInvadersLeoEcs.Services
 {
     public class EvaluateService
     {
-        public float EvaluateGameDesignPower(EcsEntity entity)
+        public float EvaluateGameDesignPower(in EcsEntity entity)
         {
             var speed = entity.Has<MoveComponent>() ? entity.Get<MoveComponent>().Speed : 0f;
             var healthCurrent = entity.Has<HealthCurrentComponent>() ? entity.Get<HealthCurrentComponent>().Value : 0f;

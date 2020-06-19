@@ -15,9 +15,9 @@ namespace SpaceInvadersLeoEcs.Systems.Model
         // auto-injected fields.
         private readonly EcsWorld _world = null;
         private readonly GameContext _gameContext = null;
-        
+
         private readonly EcsFilter<CreateMobsRequest> _filter = null;
-        
+
         void IEcsRunSystem.Run()
         {
             foreach (var i in _filter)
@@ -27,43 +27,45 @@ namespace SpaceInvadersLeoEcs.Systems.Model
             }
         }
 
-        private void CreateMobsSumPower(float powerMobs)
+        private void CreateMobsSumPower(in float powerMobs)
         {
             var lostPower = powerMobs;
             while (TryGetRandomMob(out var mobBlueprint, lostPower))
             {
-                var randomXPosition = Random.Range(_gameContext.MinBorderGameField.x, _gameContext.MaxBorderGameField.x);
-                
+                var randomXPosition =
+                    Random.Range(_gameContext.MinBorderGameField.x, _gameContext.MaxBorderGameField.x);
+
                 CreateMob(mobBlueprint, new Vector2(randomXPosition, _gameContext.MaxBorderGameField.y));
-                
+
                 var powerMob = _gameContext.MobBlueprintPowers[mobBlueprint];
-                if (powerMob < 0.1f) throw new Exception("powerMob so weak!"); 
+                if (powerMob < 0.1f) throw new Exception("powerMob so weak!");
                 lostPower -= powerMob;
             }
         }
 
-        private bool TryGetRandomMob(out MobBlueprint mobBlueprint, float maxPower)
+        private bool TryGetRandomMob(out MobBlueprint mobBlueprint, in float maxPower)
         {
             mobBlueprint = null;
-            var mobBlueprints = GetMobBlueprints(maxPower); 
+            var mobBlueprints = GetMobBlueprints(maxPower);
             mobBlueprint = mobBlueprints.Random();
             return mobBlueprint != default;
         }
 
-        private List<MobBlueprint> GetMobBlueprints(float maxPower)
+        private List<MobBlueprint> GetMobBlueprints(in float maxPower)
         {
             var result = new List<MobBlueprint>();
             foreach (var pair in _gameContext.MobBlueprintPowers)
             {
-                if(pair.Value <= maxPower) result.Add(pair.Key);
+                if (pair.Value <= maxPower) result.Add(pair.Key);
             }
+
             return result;
         }
-        
-        private void CreateMob(MobBlueprint mobBlueprint, Vector2 position)
+
+        private void CreateMob(MobBlueprint mobBlueprint, in Vector2 position)
         {
             var entity = mobBlueprint.CreateEntity(_world);
-            entity.Get<CreateViewRequest>().StartPosition  = position;
+            entity.Get<CreateViewRequest>().StartPosition = position;
         }
     }
 }

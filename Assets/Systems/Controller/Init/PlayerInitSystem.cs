@@ -47,7 +47,7 @@ namespace SpaceInvadersLeoEcs.Systems.Controller.Init
             entity.Get<HealthBaseComponent>().Value = 1;
             entity.Get<HealthCurrentComponent>().Value = 1;
             
-            playerTransform.GetProvider().SetEntity(_world, entity);
+            playerTransform.GetProvider().SetEntity(entity);
             
             return entity;
         }

@@ -58,7 +58,7 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
 
         }
 
-        private void SendMessageInGame<T>(T messageEvent)
+        private void SendMessageInGame<T>(in T messageEvent)
             where T : struct
         {
             if(_gameContext.GameState != GameStates.Play) return;

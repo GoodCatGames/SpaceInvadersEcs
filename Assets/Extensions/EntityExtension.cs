@@ -16,7 +16,6 @@ namespace SpaceInvadersLeoEcs.Extensions
         public static void AddEventToStack<T>(in this EcsEntity entity, in T eventComponent)
             where T : struct
         {
-            if(!entity.IsAlive()) throw new Exception();
             ref var containerComponents = ref entity.Get<ContainerComponents<T>>();
             containerComponents.List.Add(eventComponent);
         }

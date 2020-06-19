@@ -20,7 +20,7 @@ namespace SpaceInvadersLeoEcs
 {
     internal sealed class GameStartup : MonoBehaviour
     {
-        public GameConfiguration gameConfiguration;
+        public GameConfiguration gameConfiguration = null;
 
         private EcsWorld _world;
         private EcsSystems _systems;

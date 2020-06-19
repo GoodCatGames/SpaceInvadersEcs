@@ -36,12 +36,10 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
             }
         }
 
-        private void CreateBullet(BulletBlueprint bulletBlueprint, Vector2 position, float speed)
+        private void CreateBullet(BulletBlueprint bulletBlueprint, in Vector2 position, in float speed)
         {
             var entity = bulletBlueprint.CreateEntity(_world);
-
-            ref var moveComponent = ref entity.Get<MoveComponent>();
-            moveComponent.Speed = speed;
+            entity.Get<MoveComponent>().Speed = speed;
             entity.Get<CreateViewRequest>().StartPosition = position;
         }
 
