@@ -1,5 +1,4 @@
 ﻿using SpaceInvadersLeoEcs.Extensions.UnityComponents;
-using SpaceInvadersLeoEcs.UnityComponents;
 using UnityEngine;
 
 namespace SpaceInvadersLeoEcs.Extensions.UnityComponent

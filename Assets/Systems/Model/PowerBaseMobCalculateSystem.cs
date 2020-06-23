@@ -1,8 +1,6 @@
 ﻿using Leopotam.Ecs;
 using SpaceInvadersLeoEcs.Components.Body;
 using SpaceInvadersLeoEcs.Components.Body.Mob;
-using SpaceInvadersLeoEcs.Components.Events;
-using SpaceInvadersLeoEcs.Components.Requests;
 using SpaceInvadersLeoEcs.Services;
 
 namespace SpaceInvadersLeoEcs.Systems.Model

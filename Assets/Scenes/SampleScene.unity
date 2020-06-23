@@ -234,7 +234,6 @@ GameObject:
   m_Component:
   - component: {fileID: 324185826}
   - component: {fileID: 324185825}
-  - component: {fileID: 324185828}
   - component: {fileID: 324185827}
   m_Layer: 0
   m_Name: AppContainer
@@ -289,20 +288,6 @@ MonoBehaviour:
   ScoreText: {fileID: 1909205959}
   Player1: {fileID: 1880023552}
   Player2: {fileID: 511846196}
---- !u!114 &324185828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324185824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62f134e2186f4d2b93d4932abdbae2a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shot: {fileID: 8300000, guid: 5df43e3473094a740bc62817f283b602, type: 3}
-  reload: {fileID: 8300000, guid: dcdb2e57a166ea646874e65a0582266c, type: 3}
 --- !u!4 &511846196 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7098911125719814918, guid: eb708a4abfd0f764993efcbb501f93f9,

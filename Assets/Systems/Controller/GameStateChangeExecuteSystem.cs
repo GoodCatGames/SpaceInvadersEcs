@@ -3,7 +3,8 @@ using Leopotam.Ecs;
 using SpaceInvadersLeoEcs.AppData;
 using SpaceInvadersLeoEcs.Components.Body.GameManager;
 using SpaceInvadersLeoEcs.Components.Requests;
-using SpaceInvadersLeoEcs.Services;
+using SpaceInvadersLeoEcs.Extensions.Components;
+using SpaceInvadersLeoEcs.UnityComponents;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,11 +15,11 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
         // auto-injected fields.
         private readonly GameContext _gameContext = null;
         private readonly SceneData _sceneData = null;
-        private readonly AudioService _audioService = null;
 
         private readonly EcsFilter<ChangeGameStateRequest> _filter = null;
         private readonly EcsFilter<ScoreComponent> _filterScore = null;
-
+        private readonly EcsFilter<WrapperUnityObjectComponent<GunAudioUnityComponent>> _filterAudio = null;
+        
         void IEcsRunSystem.Run()
         {
             foreach (var i in _filter)
@@ -30,7 +31,7 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
                     case GameStates.Play:
                         Time.timeScale = 1f;
                         SetSplashScreen(false);
-                        _audioService.UnPause();
+                        AudioUnPause();
                         break;
 
                     case GameStates.Pause:
@@ -38,7 +39,7 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
                         Time.timeScale = 0f;
                         SetSplashScreen(true);
                         _sceneData.SplashScreenScore.text = GetScoreText();
-                        _audioService.Pause();
+                        AudioPause();
                         break;
                     
                     case GameStates.Restart:
@@ -55,6 +56,24 @@ namespace SpaceInvadersLeoEcs.Systems.Controller
             }
         }
 
+        private void AudioPause()
+        {
+            foreach (var i in _filterAudio)
+            {
+                var audioUnityComponent = _filterAudio.Get1(i).Value;
+                audioUnityComponent.Pause();
+            }
+        }
+        
+        private void AudioUnPause()
+        {
+            foreach (var i in _filterAudio)
+            {
+                var audioUnityComponent = _filterAudio.Get1(i).Value;
+                audioUnityComponent.UnPause();
+            }
+        }
+        
         private void SetSplashScreen(bool setActive) => _sceneData.SplashScreen.gameObject.SetActive(setActive);
 
         private string GetScoreText()

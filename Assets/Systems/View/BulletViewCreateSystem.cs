@@ -12,7 +12,6 @@ namespace SpaceInvadersLeoEcs.Systems.View
     internal sealed class BulletViewCreateSystem : ViewCreateSystem<IsBulletComponent>
     {
         // auto-injected fields.
-        private readonly AudioService _audioService = null;
         private readonly PoolsObject _poolsObject = null;
 
         protected override Transform CreateView(in EcsEntity entity, in Vector3 startPosition)
@@ -25,7 +24,6 @@ namespace SpaceInvadersLeoEcs.Systems.View
             var rigidbody2D = poolObject.Rigidbody2D;
             entity.Get<ViewObjectComponent>().ViewObject = new ViewObjectUnity(transform, rigidbody2D, poolObject);
 
-            _audioService.PlayShoot();
             return transform;
         }
     }

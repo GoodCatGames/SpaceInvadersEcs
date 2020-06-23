@@ -1,14 +1,13 @@
 ﻿using Leopotam.Ecs;
 using SpaceInvadersLeoEcs.Components.Body.Gun;
 using SpaceInvadersLeoEcs.Components.Events;
-using SpaceInvadersLeoEcs.Components.Requests;
 
 namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
 {
     internal sealed class AmmoUsedSystem : IEcsRunSystem
     {
         // auto-injected fields.
-        private readonly EcsFilter<AmmoComponent, IsShotMakeRequest> _filter = null;
+        private readonly EcsFilter<AmmoComponent, IsShotMadeEvent> _filter = null;
 
         void IEcsRunSystem.Run()
         {

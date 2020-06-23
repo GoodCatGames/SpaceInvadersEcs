@@ -10,6 +10,7 @@ using SpaceInvadersLeoEcs.Components.Requests;
 using SpaceInvadersLeoEcs.Extensions.Components;
 using SpaceInvadersLeoEcs.Extensions.UnityComponent;
 using SpaceInvadersLeoEcs.Systems.Model.Data;
+using SpaceInvadersLeoEcs.UnityComponents;
 using UnityEngine;
 
 namespace SpaceInvadersLeoEcs.Systems.Controller.Init
@@ -30,7 +31,7 @@ namespace SpaceInvadersLeoEcs.Systems.Controller.Init
         private void InitPlayer(Transform playerTransform, in int numberPlayer, GunBlueprint gunBlueprint)
         {
             var player = CreatePlayer(playerTransform, numberPlayer);
-            SetStartGun(player, gunBlueprint);
+            SetStartGun(player, playerTransform, gunBlueprint);
             CreateGunIndicator(player);
         }
 
@@ -52,11 +53,12 @@ namespace SpaceInvadersLeoEcs.Systems.Controller.Init
             return entity;
         }
 
-        private void SetStartGun(in EcsEntity player, GunBlueprint gunBlueprint)
+        private void SetStartGun(in EcsEntity player, Transform playerTransform, GunBlueprint gunBlueprint)
         {
             var gun = gunBlueprint.CreateEntity(_world);
             gun.Get<OwnerPlayerComponent>().PlayerEntity = player;
             gun.Get<IsCanShootComponent>();
+            gun.Get<WrapperUnityObjectComponent<GunAudioUnityComponent>>().Value = playerTransform.GetComponent<GunAudioUnityComponent>();
         }
 
         private void CreateGunIndicator(in EcsEntity player)

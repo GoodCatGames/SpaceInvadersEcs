@@ -92,6 +92,8 @@ namespace SpaceInvadersLeoEcs
                 .Add(new MobViewUpdateSystem())
                 .Add(new LaserRayForGunUpdateSystem())
                 .Add(new GunIndicatorViewUpdateSystem())
+                
+                .Add(new GunAudioSystem())
 
                 // register one-frame components
                 .OneFrame<InputAnyKeyEvent>()
@@ -102,7 +104,6 @@ namespace SpaceInvadersLeoEcs
                 .OneFrame<InputShootCanceledEvent>()
                 .OneFrame<InputReloadGunEvent>()
                 .OneFrame<ChangePositionEvent>()
-                .OneFrame<IsShotMakeRequest>()
                 .OneFrame<IsShotMadeEvent>()
                 .OneFrame<IsReloadStartEvent>()
                 .OneFrame<IsReloadEndEvent>()
@@ -122,7 +123,6 @@ namespace SpaceInvadersLeoEcs
                 .Inject(GetComponent<SceneData>())
                 .Inject(gameContext)
                 .Inject(new PoolsObject())
-                .Inject(GetComponent<AudioService>())
                 .Inject(new EvaluateService())
                 .Init();
         }

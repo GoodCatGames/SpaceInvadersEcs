@@ -1,5 +1,4 @@
-﻿using System;
-using Leopotam.Ecs;
+﻿using Leopotam.Ecs;
 using SpaceInvadersLeoEcs.Extensions.Components;
 
 namespace SpaceInvadersLeoEcs.Extensions

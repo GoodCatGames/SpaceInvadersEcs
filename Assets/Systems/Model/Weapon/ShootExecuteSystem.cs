@@ -4,6 +4,7 @@ using SpaceInvadersLeoEcs.Blueprints;
 using SpaceInvadersLeoEcs.Components.Body;
 using SpaceInvadersLeoEcs.Components.Body.Gun;
 using SpaceInvadersLeoEcs.Components.Body.WrappersMonoBehaviour;
+using SpaceInvadersLeoEcs.Components.Events;
 using SpaceInvadersLeoEcs.Components.Requests;
 using SpaceInvadersLeoEcs.Extensions.Blueprints;
 using UnityEngine;
@@ -43,6 +44,6 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
             entity.Get<CreateViewRequest>().StartPosition = position;
         }
 
-        private void MessageShotMade(in EcsEntity gun) => gun.Get<IsShotMakeRequest>();
+        private void MessageShotMade(in EcsEntity gun) => gun.Get<IsShotMadeEvent>();
     }
 }

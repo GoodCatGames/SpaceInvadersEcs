@@ -5,7 +5,6 @@ using SpaceInvadersLeoEcs.Components.Body.Player;
 using SpaceInvadersLeoEcs.Components.Body.UI;
 using SpaceInvadersLeoEcs.Components.Events;
 using SpaceInvadersLeoEcs.Extensions.Components;
-using SpaceInvadersLeoEcs.Services;
 using SpaceInvadersLeoEcs.Helpers;
 using UnityEngine.UI;
 
@@ -14,8 +13,6 @@ namespace SpaceInvadersLeoEcs.Systems.View
     internal sealed class GunIndicatorViewUpdateSystem : IEcsRunSystem
     {
         // auto-injected fields.
-        private readonly AudioService _audioService = null;
-
         private readonly EcsFilter<IsCanShootComponent, OwnerPlayerComponent, IsReloadStartEvent> _gunsStartReload = null;
         private readonly EcsFilter<IsCanShootComponent, OwnerPlayerComponent, IsReloadEndEvent> _gunsEndReload = null;
         private readonly EcsFilter<IsCanShootComponent, OwnerPlayerComponent, IsShotMadeEvent> _gunsMadeShot = null;
@@ -35,21 +32,12 @@ namespace SpaceInvadersLeoEcs.Systems.View
             {
                 ref var gun = ref _gunsStartReload.GetEntity(i);
                 SetReloadState(gun);
-
-                ref var playerOwner = ref gun.Get<OwnerPlayerComponent>();
-                var numberPlayer = playerOwner.PlayerEntity.Get<PlayerComponent>().Number;
-                _audioService.StartPlayReloadPlayer(numberPlayer);
             }
 
             foreach (var i in _gunsEndReload)
             {
                 ref var gun = ref _gunsEndReload.GetEntity(i);
                 SetAmmoState(gun);
-                
-                ref var playerOwner = ref gun.Get<OwnerPlayerComponent>();
-                var numberPlayer = playerOwner.PlayerEntity.Get<PlayerComponent>().Number;
-                
-                _audioService.StopPlayReload(numberPlayer);
             }
         }
 

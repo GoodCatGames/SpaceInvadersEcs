@@ -1,14 +1,14 @@
 ﻿using Leopotam.Ecs;
 using SpaceInvadersLeoEcs.Components.Body.Gun;
 using SpaceInvadersLeoEcs.Components.Body.Timers;
-using SpaceInvadersLeoEcs.Components.Requests;
+using SpaceInvadersLeoEcs.Components.Events;
 
 namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
 {
     internal sealed class GunTimerBetweenShotsStartSystem : IEcsRunSystem
     {
         // auto-injected fields.
-        private readonly EcsFilter<TimeBetweenShotsSetupComponent, IsShotMakeRequest> _filter = null;
+        private readonly EcsFilter<TimeBetweenShotsSetupComponent, IsShotMadeEvent> _filter = null;
         
         void IEcsRunSystem.Run()
         {
