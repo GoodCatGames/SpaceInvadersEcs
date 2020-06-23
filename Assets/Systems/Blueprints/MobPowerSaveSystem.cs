@@ -10,7 +10,7 @@ namespace SpaceInvadersLeoEcs.Systems.Blueprints
     {
         // auto-injected fields.
         private readonly GameContext _gameContext = null;
-        private readonly EcsFilter<BlueprintRefComponent<MobBlueprint>, PowerGameDesignCurrentComponent> _filter = null;
+        private readonly EcsFilter<BlueprintRefComponent<MobBlueprint>, PowerGameDesignBaseComponent> _filter = null;
         
         void IEcsRunSystem.Run()
         {

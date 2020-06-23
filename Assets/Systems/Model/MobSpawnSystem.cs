@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Leopotam.Ecs;
 using SpaceInvadersLeoEcs.AppData;
 using SpaceInvadersLeoEcs.Blueprints;
+using SpaceInvadersLeoEcs.Components.Body;
 using SpaceInvadersLeoEcs.Components.Requests;
 using SpaceInvadersLeoEcs.Extensions;
 using UnityEngine;
@@ -65,6 +66,9 @@ namespace SpaceInvadersLeoEcs.Systems.Model
         private void CreateMob(MobBlueprint mobBlueprint, in Vector2 position)
         {
             var entity = mobBlueprint.CreateEntity(_world);
+            var power = _gameContext.MobBlueprintPowers[mobBlueprint];
+            entity.Get<PowerGameDesignBaseComponent>().Power = power;
+            entity.Get<PowerGameDesignCurrentComponent>().Power = power;
             entity.Get<CreateViewRequest>().StartPosition = position;
         }
     }

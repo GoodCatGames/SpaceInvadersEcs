@@ -23,7 +23,7 @@ namespace SpaceInvadersLeoEcs.Systems.Blueprints
             foreach (var key in _gameContext.MobBlueprintPowers.Keys)
             {
                 var entity = key.CreateEntity(_world);
-                entity.Get<BlueprintRefComponent<MobBlueprint>>() = new BlueprintRefComponent<MobBlueprint>() {Value = key};
+                entity.Get<BlueprintRefComponent<MobBlueprint>>().Value = key;
             }
         }
     }

@@ -133,7 +133,7 @@ namespace SpaceInvadersLeoEcs
             var systemsBlueprints = new EcsSystems(worldCalculateStartPowerMobs);
             systemsBlueprints
                 .Add(new BlueprintLoadSystem())
-                .Add(new PowerMobCalculateSystem())
+                .Add(new PowerBaseMobCalculateSystem())
                 .Add(new MobPowerSaveSystem())
                 .Inject(gameContext)
                 .Inject(gameConfig)
