@@ -6,14 +6,12 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace SpaceInvadersLeoEcs
+public class @InputControls : IInputActionCollection, IDisposable
 {
-    public class @InputControls : IInputActionCollection, IDisposable
+    public InputActionAsset asset { get; }
+    public @InputControls()
     {
-        public InputActionAsset asset { get; }
-        public @InputControls()
-        {
-            asset = InputActionAsset.FromJson(@"{
+        asset = InputActionAsset.FromJson(@"{
     ""name"": ""InputControls"",
     ""maps"": [
         {
@@ -251,229 +249,228 @@ namespace SpaceInvadersLeoEcs
         }
     ]
 }");
-            // Player1
-            m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
-            m_Player1_Move = m_Player1.FindAction("Move", throwIfNotFound: true);
-            m_Player1_Shoot = m_Player1.FindAction("Shoot", throwIfNotFound: true);
-            m_Player1_Reload = m_Player1.FindAction("Reload", throwIfNotFound: true);
-            // Player2
-            m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
-            m_Player2_Move = m_Player2.FindAction("Move", throwIfNotFound: true);
-            m_Player2_Shoot = m_Player2.FindAction("Shoot", throwIfNotFound: true);
-            m_Player2_Reload = m_Player2.FindAction("Reload", throwIfNotFound: true);
-            // Common
-            m_Common = asset.FindActionMap("Common", throwIfNotFound: true);
-            m_Common_AnyKey = m_Common.FindAction("AnyKey", throwIfNotFound: true);
-            m_Common_PauseQuit = m_Common.FindAction("PauseQuit", throwIfNotFound: true);
-        }
-
-        public void Dispose()
-        {
-            UnityEngine.Object.Destroy(asset);
-        }
-
-        public InputBinding? bindingMask
-        {
-            get => asset.bindingMask;
-            set => asset.bindingMask = value;
-        }
-
-        public ReadOnlyArray<InputDevice>? devices
-        {
-            get => asset.devices;
-            set => asset.devices = value;
-        }
-
-        public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
-
-        public bool Contains(InputAction action)
-        {
-            return asset.Contains(action);
-        }
-
-        public IEnumerator<InputAction> GetEnumerator()
-        {
-            return asset.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        public void Enable()
-        {
-            asset.Enable();
-        }
-
-        public void Disable()
-        {
-            asset.Disable();
-        }
-
         // Player1
-        private readonly InputActionMap m_Player1;
-        private IPlayer1Actions m_Player1ActionsCallbackInterface;
-        private readonly InputAction m_Player1_Move;
-        private readonly InputAction m_Player1_Shoot;
-        private readonly InputAction m_Player1_Reload;
-        public struct Player1Actions
-        {
-            private readonly @InputControls m_Wrapper;
-            public Player1Actions(@InputControls wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Move => m_Wrapper.m_Player1_Move;
-            public InputAction @Shoot => m_Wrapper.m_Player1_Shoot;
-            public InputAction @Reload => m_Wrapper.m_Player1_Reload;
-            public InputActionMap Get() { return m_Wrapper.m_Player1; }
-            public void Enable() { Get().Enable(); }
-            public void Disable() { Get().Disable(); }
-            public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(Player1Actions set) { return set.Get(); }
-            public void SetCallbacks(IPlayer1Actions instance)
-            {
-                if (m_Wrapper.m_Player1ActionsCallbackInterface != null)
-                {
-                    @Move.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMove;
-                    @Move.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMove;
-                    @Move.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMove;
-                    @Shoot.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnShoot;
-                    @Shoot.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnShoot;
-                    @Shoot.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnShoot;
-                    @Reload.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnReload;
-                    @Reload.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnReload;
-                    @Reload.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnReload;
-                }
-                m_Wrapper.m_Player1ActionsCallbackInterface = instance;
-                if (instance != null)
-                {
-                    @Move.started += instance.OnMove;
-                    @Move.performed += instance.OnMove;
-                    @Move.canceled += instance.OnMove;
-                    @Shoot.started += instance.OnShoot;
-                    @Shoot.performed += instance.OnShoot;
-                    @Shoot.canceled += instance.OnShoot;
-                    @Reload.started += instance.OnReload;
-                    @Reload.performed += instance.OnReload;
-                    @Reload.canceled += instance.OnReload;
-                }
-            }
-        }
-        public Player1Actions @Player1 => new Player1Actions(this);
-
+        m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
+        m_Player1_Move = m_Player1.FindAction("Move", throwIfNotFound: true);
+        m_Player1_Shoot = m_Player1.FindAction("Shoot", throwIfNotFound: true);
+        m_Player1_Reload = m_Player1.FindAction("Reload", throwIfNotFound: true);
         // Player2
-        private readonly InputActionMap m_Player2;
-        private IPlayer2Actions m_Player2ActionsCallbackInterface;
-        private readonly InputAction m_Player2_Move;
-        private readonly InputAction m_Player2_Shoot;
-        private readonly InputAction m_Player2_Reload;
-        public struct Player2Actions
-        {
-            private readonly @InputControls m_Wrapper;
-            public Player2Actions(@InputControls wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Move => m_Wrapper.m_Player2_Move;
-            public InputAction @Shoot => m_Wrapper.m_Player2_Shoot;
-            public InputAction @Reload => m_Wrapper.m_Player2_Reload;
-            public InputActionMap Get() { return m_Wrapper.m_Player2; }
-            public void Enable() { Get().Enable(); }
-            public void Disable() { Get().Disable(); }
-            public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(Player2Actions set) { return set.Get(); }
-            public void SetCallbacks(IPlayer2Actions instance)
-            {
-                if (m_Wrapper.m_Player2ActionsCallbackInterface != null)
-                {
-                    @Move.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMove;
-                    @Move.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMove;
-                    @Move.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMove;
-                    @Shoot.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnShoot;
-                    @Shoot.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnShoot;
-                    @Shoot.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnShoot;
-                    @Reload.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnReload;
-                    @Reload.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnReload;
-                    @Reload.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnReload;
-                }
-                m_Wrapper.m_Player2ActionsCallbackInterface = instance;
-                if (instance != null)
-                {
-                    @Move.started += instance.OnMove;
-                    @Move.performed += instance.OnMove;
-                    @Move.canceled += instance.OnMove;
-                    @Shoot.started += instance.OnShoot;
-                    @Shoot.performed += instance.OnShoot;
-                    @Shoot.canceled += instance.OnShoot;
-                    @Reload.started += instance.OnReload;
-                    @Reload.performed += instance.OnReload;
-                    @Reload.canceled += instance.OnReload;
-                }
-            }
-        }
-        public Player2Actions @Player2 => new Player2Actions(this);
-
+        m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
+        m_Player2_Move = m_Player2.FindAction("Move", throwIfNotFound: true);
+        m_Player2_Shoot = m_Player2.FindAction("Shoot", throwIfNotFound: true);
+        m_Player2_Reload = m_Player2.FindAction("Reload", throwIfNotFound: true);
         // Common
-        private readonly InputActionMap m_Common;
-        private ICommonActions m_CommonActionsCallbackInterface;
-        private readonly InputAction m_Common_AnyKey;
-        private readonly InputAction m_Common_PauseQuit;
-        public struct CommonActions
+        m_Common = asset.FindActionMap("Common", throwIfNotFound: true);
+        m_Common_AnyKey = m_Common.FindAction("AnyKey", throwIfNotFound: true);
+        m_Common_PauseQuit = m_Common.FindAction("PauseQuit", throwIfNotFound: true);
+    }
+
+    public void Dispose()
+    {
+        UnityEngine.Object.Destroy(asset);
+    }
+
+    public InputBinding? bindingMask
+    {
+        get => asset.bindingMask;
+        set => asset.bindingMask = value;
+    }
+
+    public ReadOnlyArray<InputDevice>? devices
+    {
+        get => asset.devices;
+        set => asset.devices = value;
+    }
+
+    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+
+    public bool Contains(InputAction action)
+    {
+        return asset.Contains(action);
+    }
+
+    public IEnumerator<InputAction> GetEnumerator()
+    {
+        return asset.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+
+    public void Enable()
+    {
+        asset.Enable();
+    }
+
+    public void Disable()
+    {
+        asset.Disable();
+    }
+
+    // Player1
+    private readonly InputActionMap m_Player1;
+    private IPlayer1Actions m_Player1ActionsCallbackInterface;
+    private readonly InputAction m_Player1_Move;
+    private readonly InputAction m_Player1_Shoot;
+    private readonly InputAction m_Player1_Reload;
+    public struct Player1Actions
+    {
+        private @InputControls m_Wrapper;
+        public Player1Actions(@InputControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Player1_Move;
+        public InputAction @Shoot => m_Wrapper.m_Player1_Shoot;
+        public InputAction @Reload => m_Wrapper.m_Player1_Reload;
+        public InputActionMap Get() { return m_Wrapper.m_Player1; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(Player1Actions set) { return set.Get(); }
+        public void SetCallbacks(IPlayer1Actions instance)
         {
-            private readonly @InputControls m_Wrapper;
-            public CommonActions(@InputControls wrapper) { m_Wrapper = wrapper; }
-            public InputAction @AnyKey => m_Wrapper.m_Common_AnyKey;
-            public InputAction @PauseQuit => m_Wrapper.m_Common_PauseQuit;
-            public InputActionMap Get() { return m_Wrapper.m_Common; }
-            public void Enable() { Get().Enable(); }
-            public void Disable() { Get().Disable(); }
-            public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(CommonActions set) { return set.Get(); }
-            public void SetCallbacks(ICommonActions instance)
+            if (m_Wrapper.m_Player1ActionsCallbackInterface != null)
             {
-                if (m_Wrapper.m_CommonActionsCallbackInterface != null)
-                {
-                    @AnyKey.started -= m_Wrapper.m_CommonActionsCallbackInterface.OnAnyKey;
-                    @AnyKey.performed -= m_Wrapper.m_CommonActionsCallbackInterface.OnAnyKey;
-                    @AnyKey.canceled -= m_Wrapper.m_CommonActionsCallbackInterface.OnAnyKey;
-                    @PauseQuit.started -= m_Wrapper.m_CommonActionsCallbackInterface.OnPauseQuit;
-                    @PauseQuit.performed -= m_Wrapper.m_CommonActionsCallbackInterface.OnPauseQuit;
-                    @PauseQuit.canceled -= m_Wrapper.m_CommonActionsCallbackInterface.OnPauseQuit;
-                }
-                m_Wrapper.m_CommonActionsCallbackInterface = instance;
-                if (instance != null)
-                {
-                    @AnyKey.started += instance.OnAnyKey;
-                    @AnyKey.performed += instance.OnAnyKey;
-                    @AnyKey.canceled += instance.OnAnyKey;
-                    @PauseQuit.started += instance.OnPauseQuit;
-                    @PauseQuit.performed += instance.OnPauseQuit;
-                    @PauseQuit.canceled += instance.OnPauseQuit;
-                }
+                @Move.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMove;
+                @Shoot.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnShoot;
+                @Reload.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnReload;
+            }
+            m_Wrapper.m_Player1ActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
             }
         }
-        public CommonActions @Common => new CommonActions(this);
-        private int m_KeyboardSchemeIndex = -1;
-        public InputControlScheme KeyboardScheme
+    }
+    public Player1Actions @Player1 => new Player1Actions(this);
+
+    // Player2
+    private readonly InputActionMap m_Player2;
+    private IPlayer2Actions m_Player2ActionsCallbackInterface;
+    private readonly InputAction m_Player2_Move;
+    private readonly InputAction m_Player2_Shoot;
+    private readonly InputAction m_Player2_Reload;
+    public struct Player2Actions
+    {
+        private @InputControls m_Wrapper;
+        public Player2Actions(@InputControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Player2_Move;
+        public InputAction @Shoot => m_Wrapper.m_Player2_Shoot;
+        public InputAction @Reload => m_Wrapper.m_Player2_Reload;
+        public InputActionMap Get() { return m_Wrapper.m_Player2; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(Player2Actions set) { return set.Get(); }
+        public void SetCallbacks(IPlayer2Actions instance)
         {
-            get
+            if (m_Wrapper.m_Player2ActionsCallbackInterface != null)
             {
-                if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
-                return asset.controlSchemes[m_KeyboardSchemeIndex];
+                @Move.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnMove;
+                @Shoot.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnShoot;
+                @Reload.started -= m_Wrapper.m_Player2ActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_Player2ActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_Player2ActionsCallbackInterface.OnReload;
+            }
+            m_Wrapper.m_Player2ActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
             }
         }
-        public interface IPlayer1Actions
+    }
+    public Player2Actions @Player2 => new Player2Actions(this);
+
+    // Common
+    private readonly InputActionMap m_Common;
+    private ICommonActions m_CommonActionsCallbackInterface;
+    private readonly InputAction m_Common_AnyKey;
+    private readonly InputAction m_Common_PauseQuit;
+    public struct CommonActions
+    {
+        private @InputControls m_Wrapper;
+        public CommonActions(@InputControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @AnyKey => m_Wrapper.m_Common_AnyKey;
+        public InputAction @PauseQuit => m_Wrapper.m_Common_PauseQuit;
+        public InputActionMap Get() { return m_Wrapper.m_Common; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CommonActions set) { return set.Get(); }
+        public void SetCallbacks(ICommonActions instance)
         {
-            void OnMove(InputAction.CallbackContext context);
-            void OnShoot(InputAction.CallbackContext context);
-            void OnReload(InputAction.CallbackContext context);
+            if (m_Wrapper.m_CommonActionsCallbackInterface != null)
+            {
+                @AnyKey.started -= m_Wrapper.m_CommonActionsCallbackInterface.OnAnyKey;
+                @AnyKey.performed -= m_Wrapper.m_CommonActionsCallbackInterface.OnAnyKey;
+                @AnyKey.canceled -= m_Wrapper.m_CommonActionsCallbackInterface.OnAnyKey;
+                @PauseQuit.started -= m_Wrapper.m_CommonActionsCallbackInterface.OnPauseQuit;
+                @PauseQuit.performed -= m_Wrapper.m_CommonActionsCallbackInterface.OnPauseQuit;
+                @PauseQuit.canceled -= m_Wrapper.m_CommonActionsCallbackInterface.OnPauseQuit;
+            }
+            m_Wrapper.m_CommonActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @AnyKey.started += instance.OnAnyKey;
+                @AnyKey.performed += instance.OnAnyKey;
+                @AnyKey.canceled += instance.OnAnyKey;
+                @PauseQuit.started += instance.OnPauseQuit;
+                @PauseQuit.performed += instance.OnPauseQuit;
+                @PauseQuit.canceled += instance.OnPauseQuit;
+            }
         }
-        public interface IPlayer2Actions
+    }
+    public CommonActions @Common => new CommonActions(this);
+    private int m_KeyboardSchemeIndex = -1;
+    public InputControlScheme KeyboardScheme
+    {
+        get
         {
-            void OnMove(InputAction.CallbackContext context);
-            void OnShoot(InputAction.CallbackContext context);
-            void OnReload(InputAction.CallbackContext context);
+            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+            return asset.controlSchemes[m_KeyboardSchemeIndex];
         }
-        public interface ICommonActions
-        {
-            void OnAnyKey(InputAction.CallbackContext context);
-            void OnPauseQuit(InputAction.CallbackContext context);
-        }
+    }
+    public interface IPlayer1Actions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
+    }
+    public interface IPlayer2Actions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
+    }
+    public interface ICommonActions
+    {
+        void OnAnyKey(InputAction.CallbackContext context);
+        void OnPauseQuit(InputAction.CallbackContext context);
     }
 }
