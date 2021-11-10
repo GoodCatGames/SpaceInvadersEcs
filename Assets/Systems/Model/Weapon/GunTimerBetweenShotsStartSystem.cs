@@ -2,6 +2,7 @@
 using SpaceInvadersLeoEcs.Components.Body.Gun;
 using SpaceInvadersLeoEcs.Components.Body.Timers;
 using SpaceInvadersLeoEcs.Components.Events;
+using SpaceInvadersLeoEcs.Extensions.Systems.Timers;
 
 namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
 {
@@ -16,7 +17,7 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
             {
                 ref var timeBetweenShotsComponent = ref _filter.Get1(i);
                 ref var gun = ref _filter.GetEntity(i);
-                gun.Get<TimeRBetweenShotsComponent>().TimeLostSec = timeBetweenShotsComponent.TimeSec;
+                gun.Get<Timer<IsTimerBetweenShots>>().TimeLeftSec = timeBetweenShotsComponent.TimeSec;
             }
         }
     }

@@ -5,6 +5,7 @@ using SpaceInvadersLeoEcs.Components.Body.Player;
 using SpaceInvadersLeoEcs.Components.Body.Timers;
 using SpaceInvadersLeoEcs.Components.Events;
 using SpaceInvadersLeoEcs.Components.Events.InputEvents;
+using SpaceInvadersLeoEcs.Extensions.Systems.Timers;
 
 namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
 {
@@ -13,11 +14,11 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
         // auto-injected fields.
         
         // Auto
-        private readonly EcsFilter<ReloadGunComponent, AmmoCapacityComponent>.Exclude<TimeRGunReloadComponent, AmmoComponent>
+        private readonly EcsFilter<ReloadGunComponent, AmmoCapacityComponent>.Exclude<Timer<IsTimerGunReload>, AmmoComponent>
             _filterGunsNoAmmo = null;
 
         // Manual
-        private readonly EcsFilter<OwnerPlayerComponent, ReloadGunComponent, AmmoCapacityComponent, AmmoComponent>.Exclude<TimeRGunReloadComponent>
+        private readonly EcsFilter<OwnerPlayerComponent, ReloadGunComponent, AmmoCapacityComponent, AmmoComponent>.Exclude<Timer<IsTimerGunReload>>
             _filterGunsWithAmmo = null;
 
         private readonly EcsFilter<InputReloadGunEvent> _filterInputReloadGunEvent = null;
@@ -31,7 +32,7 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
             AutoReload(_filterGunsNoAmmo);
         }
 
-        private void AutoReload(EcsFilter<ReloadGunComponent, AmmoCapacityComponent>.Exclude<TimeRGunReloadComponent, AmmoComponent> filterGunsNoAmmo)
+        private void AutoReload(EcsFilter<ReloadGunComponent, AmmoCapacityComponent>.Exclude<Timer<IsTimerGunReload>, AmmoComponent> filterGunsNoAmmo)
         {
             foreach (var i in filterGunsNoAmmo)
             {
@@ -42,7 +43,7 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
         }
 
         private void ManualReload(EcsFilter<InputReloadGunEvent> filterInputReloadGunEvent,
-            EcsFilter<OwnerPlayerComponent, ReloadGunComponent, AmmoCapacityComponent, AmmoComponent>.Exclude<TimeRGunReloadComponent>
+            EcsFilter<OwnerPlayerComponent, ReloadGunComponent, AmmoCapacityComponent, AmmoComponent>.Exclude<Timer<IsTimerGunReload>>
                 filterGunsWithAmmo)
         {
             foreach (var i in filterInputReloadGunEvent)
@@ -67,7 +68,7 @@ namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
         {
             gun.Get<IsReloadStartEvent>();
             gun.Get<IsReloadGunInProcessComponent>();
-            gun.Get<TimeRGunReloadComponent>().TimeLostSec = timeSec;
+            gun.Get<Timer<IsTimerGunReload>>().TimeLeftSec = timeSec;
         }
     }
     

@@ -1,10 +1,12 @@
 using Leopotam.Ecs;
 using SpaceInvadersLeoEcs.AppData;
+using SpaceInvadersLeoEcs.Components.Body.Timers;
 using SpaceInvadersLeoEcs.Components.Events;
 using SpaceInvadersLeoEcs.Components.Events.InputEvents;
 using SpaceInvadersLeoEcs.Components.Events.UnityEvents;
 using SpaceInvadersLeoEcs.Components.Requests;
 using SpaceInvadersLeoEcs.Extensions.Components;
+using SpaceInvadersLeoEcs.Extensions.Systems.Timers;
 using SpaceInvadersLeoEcs.Extensions.Systems.ViewCreate;
 using SpaceInvadersLeoEcs.Services;
 using SpaceInvadersLeoEcs.Systems.Blueprints;
@@ -62,7 +64,9 @@ namespace SpaceInvadersLeoEcs
                 .Add(new GunTimerBetweenShotsStartSystem())
                 .Add(new GunReloadStartSystem())
                 
-                .Add(new TimerTickSystem())
+                .Add(new TimerSystem<IsTimerGunReload>())
+                .Add(new TimerSystem<IsTimerBetweenShots>())
+                
                 .Add(new GunReloadExecutedSystem())
                 
                 .Add(new MoveExecuteSystem())

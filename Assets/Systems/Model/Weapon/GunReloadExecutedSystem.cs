@@ -2,13 +2,14 @@
 using SpaceInvadersLeoEcs.Components.Body.Gun;
 using SpaceInvadersLeoEcs.Components.Body.Timers;
 using SpaceInvadersLeoEcs.Components.Events;
+using SpaceInvadersLeoEcs.Extensions.Systems.Timers;
 
 namespace SpaceInvadersLeoEcs.Systems.Model.Weapon
 {
     internal sealed class GunReloadExecutedSystem : IEcsRunSystem
     {
         // auto-injected fields.
-        private readonly EcsFilter<AmmoCapacityComponent, IsReloadGunInProcessComponent>.Exclude<TimeRGunReloadComponent> _filter = null;
+        private readonly EcsFilter<AmmoCapacityComponent, IsReloadGunInProcessComponent>.Exclude<Timer<IsTimerGunReload>> _filter = null;
         
         void IEcsRunSystem.Run()
         {
