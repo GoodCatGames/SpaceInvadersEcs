@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8911345fa6de44d8a1e0d1a3f1f34b9d, type: 3}
+  m_Name: MobHuge
+  m_EditorClassIdentifier: 
+  speed: 0.5
+  health:
+    Initial: 3
+    Current: 3
+  bulletResistanceComponent:
+    Value: 1
