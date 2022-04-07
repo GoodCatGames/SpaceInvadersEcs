@@ -15,10 +15,10 @@ MonoBehaviour:
   bulletEntityFactoryFromSo: {fileID: 11400000, guid: 9ed8970e39732ad44b2d6d914318eec7,
     type: 2}
   bulletSpeed:
-    Value: 100
+    Value: 2000
   ammoCapacity:
     Value: 6
   timeBetweenShotsSetup:
     TimeSec: 0.5
   gunReload:
-    TimeReloadSec: 2
+    TimeReloadSec: 3
