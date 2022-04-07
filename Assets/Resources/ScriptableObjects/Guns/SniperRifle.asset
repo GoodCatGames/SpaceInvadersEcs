@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54eef17b943433488d364ce55be087c, type: 3}
   m_Name: SniperRifle
   m_EditorClassIdentifier: 
-  bulletBlueprint: {fileID: 11400000, guid: 9ed8970e39732ad44b2d6d914318eec7, type: 2}
-  bulletSpeedComponent:
-    Value: 2000
-  ammoCapacityComponent:
+  bulletEntityFactoryFromSo: {fileID: 11400000, guid: 9ed8970e39732ad44b2d6d914318eec7,
+    type: 2}
+  bulletSpeed:
+    Value: 100
+  ammoCapacity:
     Value: 6
-  timeBetweenShotsSetupComponent:
-    TimeSec: 0.25
-  reloadGunComponent:
-    TimeReloadSec: 3
+  timeBetweenShotsSetup:
+    TimeSec: 0.5
+  gunReload:
+    TimeReloadSec: 2
